@@ -1,0 +1,90 @@
+[submodule "pack/cynix/opt/gruvbox"]
+	path = pack/cynix/opt/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+[submodule "pack/cynix/start/CompleteParameter.vim"]
+	path = pack/cynix/start/CompleteParameter.vim
+	url = https://github.com/tenfyzhong/CompleteParameter.vim.git
+[submodule "pack/cynix/start/ConflictDetection"]
+	path = pack/cynix/start/ConflictDetection
+	url = https://github.com/vim-scripts/ConflictDetection.git
+[submodule "pack/cynix/start/ConflictMotions"]
+	path = pack/cynix/start/ConflictMotions
+	url = https://github.com/vim-scripts/ConflictMotions.git
+[submodule "pack/cynix/start/fzf"]
+	path = pack/cynix/start/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "pack/cynix/start/fzf.vim"]
+	path = pack/cynix/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "pack/cynix/start/gitv"]
+	path = pack/cynix/start/gitv
+	url = https://github.com/gregsexton/gitv.git
+[submodule "pack/cynix/start/incsearch.vim"]
+	path = pack/cynix/start/incsearch.vim
+	url = https://github.com/haya14busa/incsearch.vim.git
+[submodule "pack/cynix/start/LanguageClient-neovim"]
+	path = pack/cynix/start/LanguageClient-neovim
+	url = https://github.com/autozimu/LanguageClient-neovim.git
+[submodule "pack/cynix/start/lexima.vim"]
+	path = pack/cynix/start/lexima.vim
+	url = https://github.com/cohama/lexima.vim.git
+[submodule "pack/cynix/start/lightline.vim"]
+	path = pack/cynix/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+[submodule "pack/cynix/start/lightline-buffer"]
+	path = pack/cynix/start/lightline-buffer
+	url = https://github.com/taohex/lightline-buffer.git
+[submodule "pack/cynix/start/neovim-fuzzy"]
+	path = pack/cynix/start/neovim-fuzzy
+	url = https://github.com/cloudhead/neovim-fuzzy.git
+[submodule "pack/cynix/start/numbers.vim"]
+	path = pack/cynix/start/numbers.vim
+	url = https://github.com/myusuf3/numbers.vim.git
+[submodule "pack/cynix/start/nvim-completion-manager"]
+	path = pack/cynix/start/nvim-completion-manager
+	url = https://github.com/roxma/nvim-completion-manager.git
+[submodule "pack/cynix/start/nvim-miniyank"]
+	path = pack/cynix/start/nvim-miniyank
+	url = https://github.com/bfredl/nvim-miniyank.git
+[submodule "pack/cynix/start/securemodelines"]
+	path = pack/cynix/start/securemodelines
+	url = https://github.com/ciaranm/securemodelines.git
+[submodule "pack/cynix/start/tcomment_vim"]
+	path = pack/cynix/start/tcomment_vim
+	url = https://github.com/tomtom/tcomment_vim.git
+[submodule "pack/cynix/start/vim-better-whitespace"]
+	path = pack/cynix/start/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace.git
+[submodule "pack/cynix/start/vim-CountJump"]
+	path = pack/cynix/start/vim-CountJump
+	url = https://github.com/inkarkat/vim-CountJump.git
+[submodule "pack/cynix/start/vim-crosshairs"]
+	path = pack/cynix/start/vim-crosshairs
+	url = https://github.com/bronson/vim-crosshairs.git
+[submodule "pack/cynix/start/vim-easy-align"]
+	path = pack/cynix/start/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "pack/cynix/start/vim-fswitch"]
+	path = pack/cynix/start/vim-fswitch
+	url = https://github.com/derekwyatt/vim-fswitch.git
+[submodule "pack/cynix/start/vim-fugitive"]
+	path = pack/cynix/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "pack/cynix/start/vim-gitgutter"]
+	path = pack/cynix/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "pack/cynix/start/vim-ingo-library"]
+	path = pack/cynix/start/vim-ingo-library
+	url = https://github.com/inkarkat/vim-ingo-library.git
+[submodule "pack/cynix/start/vim-mundo"]
+	path = pack/cynix/start/vim-mundo
+	url = https://github.com/simnalamburt/vim-mundo.git
+[submodule "pack/cynix/start/vim-picker"]
+	path = pack/cynix/start/vim-picker
+	url = https://github.com/srstevenson/vim-picker.git
+[submodule "pack/cynix/start/vim-polyglot"]
+	path = pack/cynix/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "pack/cynix/start/vim-surround"]
+	path = pack/cynix/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
