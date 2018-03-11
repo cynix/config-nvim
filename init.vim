@@ -219,8 +219,8 @@ nnoremap <Right> :bnext<CR>
 
   " LanguageClient-neovim {{{
   let g:LanguageClient_serverCommands = {
-    \ 'c': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
-    \ 'cpp': ['cquery', '--log-file=/tmp/cquery.log', '--init={"cacheDirectory":"/tmp/cquery"}'],
+    \ 'c': ['cquery', '--log-file='.expand('~/.cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cquery/cache').'"}'],
+    \ 'cpp': ['cquery', '--log-file='.expand('~/.cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cquery/cache').'"}'],
     \ 'go': ['go-langserver', '-gocodecompletion'],
     \ }
   let g:LanguageClient_changeThrottle=0.5
