@@ -222,6 +222,7 @@ nnoremap <Right> :bnext<CR>
     \ 'c': ['cquery', '--log-file='.expand('~/.cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cquery/cache').'"}'],
     \ 'cpp': ['cquery', '--log-file='.expand('~/.cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cquery/cache').'"}'],
     \ 'go': ['go-langserver', '-gocodecompletion'],
+    \ 'python': ['pyls'],
     \ }
   let g:LanguageClient_changeThrottle=0.5
   let g:LanguageClient_rootMarkers = {
