@@ -213,28 +213,48 @@ nnoremap <Right> :bnext<CR>
   endfunction "}}}
   inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  map <Esc>[Z <S-Tab>
-  ounmap <Esc>[Z
+  inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
   "}}}
 
   " LanguageClient-neovim {{{
-  let g:LanguageClient_serverCommands = {
-    \ 'c': ['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'"}'],
-    \ 'cpp': ['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'"}'],
-    \ 'go': ['go-langserver', '-gocodecompletion'],
-    \ 'python': ['pyls'],
-    \ }
+  let g:LanguageClient_serverCommands={}
+
+  if executable('cquery')
+    let g:LanguageClient_serverCommands.c=['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'","index":{"comments":0}}']
+    let g:LanguageClient_serverCommands.cpp=g:LanguageClient_serverCommands.c
+    let g:LanguageClient_serverCommands.objc=g:LanguageClient_serverCommands.c
+    let g:LanguageClient_serverCommands.objcpp=g:LanguageClient_serverCommands.c
+  endif
+
+  if executable('go-langserver')
+    let g:LanguageClient_serverCommands.go=['go-langserver', '-gocodecompletion']
+  endif
+
+  if executable('pyls')
+    let g:LanguageClient_serverCommands.python=['pyls']
+  endif
+
   let g:LanguageClient_changeThrottle=0.5
   let g:LanguageClient_rootMarkers = {
     \ 'c': ['.cquery', 'compile_commands.json'],
     \ 'cpp': ['.cquery', 'compile_commands.json'],
+    \ 'objc': ['.cquery', 'compile_commands.json'],
+    \ 'objcpp': ['.cquery', 'compile_commands.json'],
     \ 'python': ['setup.py'],
     \ }
 
   nnoremap <silent><C-h> :call LanguageClient_textDocument_hover()<CR>
   nnoremap <silent><C-j> :call LanguageClient_textDocument_definition()<CR>:normal! m`<CR>
   nnoremap <silent><C-k> :call LanguageClient_textDocument_references()<CR>
+  nnoremap <silent><F2> :call LanguageClient_textDocument_rename()<CR>
   nnoremap <silent><C-t> <C-o>
+
+  augroup LanguageClientSignColumn "{{{
+    autocmd!
+
+    autocmd User LanguageClientStarted setlocal signcolumn=yes
+    autocmd User LanguageClientStopped setlocal signcolumn=auto
+  augroup END "}}}
   " }}}
 " }}}
 
@@ -345,7 +365,7 @@ augroup AutoCloseWindows "{{{
     \ endif
 
   " automatically close preview window
-  au InsertLeave  * if pumvisible() == 0 | silent! pclose | endif
+  au CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 augroup END "}}}
 
 augroup FastEscape "{{{
