@@ -348,6 +348,13 @@ augroup AutoCloseWindows "{{{
   au InsertLeave  * if pumvisible() == 0 | silent! pclose | endif
 augroup END "}}}
 
+augroup FastEscape "{{{
+  autocmd!
+
+  autocmd InsertEnter * set timeoutlen=0
+  autocmd InsertLeave * set timeoutlen=1000
+augroup END "}}}
+
 augroup FSwitchConfig "{{{
   autocmd!
 
