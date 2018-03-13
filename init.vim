@@ -156,7 +156,6 @@ let g:ConflictMotions_ConflictMapping='c'
 "}}}
 
 " buffer {{{
-set autochdir
 set hidden
 nnoremap <Left> :bprev<CR>
 nnoremap <Right> :bnext<CR>
