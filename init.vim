@@ -274,6 +274,7 @@ endfunction "}}}
 function! LightlineReadonly() "{{{
   return &readonly ? '' : ''
 endfunction "}}}
+set noshowmode
 set showtabline=2
 let g:lightline = {
   \ 'active': {
