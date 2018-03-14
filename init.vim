@@ -106,7 +106,7 @@ set formatoptions=roqnlmB1j
 
   " commenting {{{
   nmap <silent><Leader>// <Plug>TComment_gcc
-  xmap <silent><Leader>// <Plug>TComment_gc
+  xmap <silent>// <Plug>TComment_gc
   " }}}
 " }}}
 
