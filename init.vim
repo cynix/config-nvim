@@ -120,10 +120,10 @@ set gdefault
 let g:incsearch#auto_nohlsearch=1
 map / <Plug>(incsearch-forward)\v
 map ? <Plug>(incsearch-backward)\v
-map n <Plug>(incsearch-nohl-n)
-map N <Plug>(incsearch-nohl-N)
-map * <Plug>(incsearch-nohl-*)
-map # <Plug>(incsearch-nohl-#)
+map n <Plug>(incsearch-nohl-n)zz
+map N <Plug>(incsearch-nohl-N)zz
+map * <Plug>(incsearch-nohl-*)zz
+map # <Plug>(incsearch-nohl-#)zz
 " }}}
 
 " diff {{{
