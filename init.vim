@@ -187,7 +187,15 @@ nnoremap <Right> :bnext<CR>
   nnoremap <C-o> :FSHere<CR>
 
   " fzf
-  nnoremap <C-p> :Files<CR>
+  function! MaybeGitFiles() " {{{
+    let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+    if v:shell_error
+      call fzf#vim#files('')
+    else
+      call fzf#vim#gitfiles('')
+    endif
+  endfunction " }}}
+  nnoremap <silent><C-p> :call MaybeGitFiles()<CR>
   " }}}
 " }}}
 
