@@ -1,9 +1,6 @@
 [submodule "pack/cynix/opt/gruvbox"]
 	path = pack/cynix/opt/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
-[submodule "pack/cynix/start/CompleteParameter.vim"]
-	path = pack/cynix/start/CompleteParameter.vim
-	url = https://github.com/tenfyzhong/CompleteParameter.vim.git
 [submodule "pack/cynix/start/ConflictDetection"]
 	path = pack/cynix/start/ConflictDetection
 	url = https://github.com/vim-scripts/ConflictDetection.git
