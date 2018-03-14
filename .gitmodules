@@ -31,9 +31,6 @@
 [submodule "pack/cynix/start/lightline-buffer"]
 	path = pack/cynix/start/lightline-buffer
 	url = https://github.com/taohex/lightline-buffer.git
-[submodule "pack/cynix/start/neovim-fuzzy"]
-	path = pack/cynix/start/neovim-fuzzy
-	url = https://github.com/cloudhead/neovim-fuzzy.git
 [submodule "pack/cynix/start/numbers.vim"]
 	path = pack/cynix/start/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git

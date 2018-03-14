@@ -150,9 +150,11 @@ let g:ConflictMotions_ConflictMapping='c'
   " }}}
 
   nnoremap \ <C-w>
-  nmap \\ :b#<CR>
-  nmap \d :bd<CR>
-  nmap \b :Denite buffer<CR>
+  nnoremap \\ :b#<CR>
+  nnoremap \d :bd<CR>
+
+  " fzf
+  nnoremap \b :Buffers<CR>
 "}}}
 
 " buffer {{{
@@ -178,8 +180,12 @@ nnoremap <Right> :bnext<CR>
 
   " navigation {{{
   set wildignore+=.git,*.pyc,*.gz,*.bz2
+
+  " vim-fswitch
   nnoremap <C-o> :FSHere<CR>
-  nnoremap <C-p> :FuzzyOpen<CR>
+
+  " fzf
+  nnoremap <C-p> :Files<CR>
   " }}}
 " }}}
 
