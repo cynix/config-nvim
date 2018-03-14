@@ -12,6 +12,8 @@ set title
 " }}}
 
 " display {{{
+set lazyredraw
+
   " line numbers {{{
   set numberwidth=5
   " }}}
