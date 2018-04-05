@@ -1,3 +1,4 @@
 after/
+.netrwhist
 init.vim.local
 init.vim.local.late
