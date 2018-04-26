@@ -215,61 +215,50 @@ nnoremap <Right> :bnext<CR>
 " }}}
 
 " syntax/completion {{{
-  " nvim-completion-manager {{{
-  let g:cm_completekeys="\<Plug>(cm_complete)"
-  let g:cm_matcher = {
-    \ 'module': 'cm_matchers.fuzzy_matcher',
-    \ 'case': 'smartcase',
-    \ }
+  " asyncomplete.vim {{{
+  let g:asyncomplete_remove_duplicates=1
 
-  function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~ '\s'
-  endfunction "}}}
   inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
   "}}}
 
-  " LanguageClient-neovim {{{
-  let g:LanguageClient_serverCommands={}
+  " vim-lsp {{{
+  let g:lsp_signs_enabled=1
+  let g:lsp_diagnostics_echo_cursor=1
 
   if executable('cquery')
-    let g:LanguageClient_serverCommands.c=['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'","index":{"comments":0}}']
-    let g:LanguageClient_serverCommands.cpp=g:LanguageClient_serverCommands.c
-    let g:LanguageClient_serverCommands.objc=g:LanguageClient_serverCommands.c
-    let g:LanguageClient_serverCommands.objcpp=g:LanguageClient_serverCommands.c
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'","index":{"comments":0}}']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+      \ })
   endif
 
   if executable('go-langserver')
-    let g:LanguageClient_serverCommands.go=['go-langserver', '-gocodecompletion']
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'go-langserver',
+      \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+      \ 'whitelist': ['go'],
+      \ })
   endif
 
   if executable('pyls')
-    let g:LanguageClient_serverCommands.python=['pyls']
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': {server_info->['pyls']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'setup.py'))},
+      \ 'whitelist': ['python'],
+      \ })
   endif
 
-  let g:LanguageClient_changeThrottle=0.5
-  let g:LanguageClient_rootMarkers = {
-    \ 'c': ['.cquery', 'compile_commands.json'],
-    \ 'cpp': ['.cquery', 'compile_commands.json'],
-    \ 'objc': ['.cquery', 'compile_commands.json'],
-    \ 'objcpp': ['.cquery', 'compile_commands.json'],
-    \ 'python': ['setup.py'],
-    \ }
-
-  nnoremap <silent><C-h> :call LanguageClient_textDocument_hover()<CR>
-  nnoremap <silent><C-j> :call LanguageClient_textDocument_definition()<CR>:normal! m`<CR>
-  nnoremap <silent><C-k> :call LanguageClient_textDocument_references()<CR>
-  nnoremap <silent><F2> :call LanguageClient_textDocument_rename()<CR>
+  nnoremap <silent><C-h> :LspHover<CR>
+  nnoremap <silent><C-j> :LspDefinition<CR>:normal! m`<CR>
+  nnoremap <silent><C-k> :LspReferences<CR>
+  nnoremap <silent><C-i> :LspImplementation<CR>
+  nnoremap <silent><F2> :LspRename<CR>
   nnoremap <silent><C-t> <C-o>
-
-  augroup LanguageClientSignColumn "{{{
-    autocmd!
-
-    autocmd User LanguageClientStarted setlocal signcolumn=yes
-    autocmd User LanguageClientStopped setlocal signcolumn=auto
-  augroup END "}}}
   " }}}
 " }}}
 
