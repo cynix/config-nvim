@@ -259,6 +259,13 @@ nnoremap <Right> :bnext<CR>
   nnoremap <silent><C-i> :LspImplementation<CR>
   nnoremap <silent><F2> :LspRename<CR>
   nnoremap <silent><C-t> <C-o>
+
+  augroup LspSignColumn "{{{
+    autocmd!
+
+    autocmd User lsp_server_init setlocal signcolumn=yes
+    autocmd User lsp_server_exit setlocal signcolumn=auto
+  augroup END "}}}
   " }}}
 " }}}
 
