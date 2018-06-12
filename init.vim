@@ -365,6 +365,9 @@ augroup FileTypeSpecific "{{{
   " python {{{
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
   " }}}
+  " go {{{
+  autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
+  " }}}
 augroup END "}}}
 
 augroup AutoCloseWindows "{{{
