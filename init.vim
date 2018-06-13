@@ -110,6 +110,11 @@ set formatoptions=roqnlmB1j
   nmap <silent><Leader>// <Plug>TComment_gcc
   xmap <silent>// <Plug>TComment_gc
   " }}}
+
+  " aligning {{{
+  nmap ga <Plug>(EasyAlign)
+  xmap ga <Plug>(EasyAlign)
+  " }}}
 " }}}
 
 " search/replace {{{
