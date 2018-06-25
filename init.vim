@@ -134,9 +134,6 @@ map # <Plug>(incsearch-nohl-#)zz
 " diff {{{
 set diffopt+=context:3
 
-highlight def conflictOursMarker ctermfg=red
-highlight def conflictTheirsMarker ctermfg=red
-highlight def link conflictBaseMarker conflictBase
 let g:ConflictMotions_ConflictBeginMapping='c'
 let g:ConflictMotions_ConflictEndMapping='C'
 let g:ConflictMotions_ConflictMapping='c'
@@ -216,6 +213,13 @@ nnoremap <Right> :bnext<CR>
   " vim-better-whitespace {{{
   let g:show_spaces_that_precede_tabs=1
   highlight ExtraWhitespace ctermbg=88 guibg=#870000
+  " }}}
+
+  " ConflictDetection {{{
+  highlight link conflictOursMarker GruvboxRed
+  highlight link conflictBaseMarker GruvboxRed
+  highlight link conflictSeparatorMarkerSymbol GruvboxRed
+  highlight link conflictTheirsMarker GruvboxRed
   " }}}
 " }}}
 
