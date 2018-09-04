@@ -75,7 +75,7 @@
 	url = https://github.com/inkarkat/vim-ingo-library.git
 [submodule "pack/cynix/start/vim-lsp"]
 	path = pack/cynix/start/vim-lsp
-	url = https://github.com/prabirshrestha/vim-lsp.git
+	url = https://github.com/cynix/vim-lsp.git
 [submodule "pack/cynix/start/vim-mundo"]
 	path = pack/cynix/start/vim-mundo
 	url = https://github.com/simnalamburt/vim-mundo.git
