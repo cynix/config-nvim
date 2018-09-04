@@ -226,6 +226,8 @@ nnoremap <Right> :bnext<CR>
 " syntax/completion {{{
   " asyncomplete.vim {{{
   let g:asyncomplete_remove_duplicates=1
+  let g:asyncomplete_smart_completion=1
+  let g:asyncomplete_auto_popup=1
 
   inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
