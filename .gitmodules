@@ -36,7 +36,7 @@
 	url = https://github.com/itchyny/lightline.vim.git
 [submodule "pack/cynix/start/lightline-buffer"]
 	path = pack/cynix/start/lightline-buffer
-	url = https://github.com/taohex/lightline-buffer.git
+	url = https://github.com/taohexxx/lightline-buffer.git
 [submodule "pack/cynix/start/numbers.vim"]
 	path = pack/cynix/start/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git
@@ -75,7 +75,7 @@
 	url = https://github.com/inkarkat/vim-ingo-library.git
 [submodule "pack/cynix/start/vim-lsp"]
 	path = pack/cynix/start/vim-lsp
-	url = https://github.com/cynix/vim-lsp.git
+	url = https://github.com/prabirshrestha/vim-lsp.git
 [submodule "pack/cynix/start/vim-mundo"]
 	path = pack/cynix/start/vim-mundo
 	url = https://github.com/simnalamburt/vim-mundo.git
