@@ -1,15 +1,12 @@
 [submodule "pack/cynix/opt/gruvbox"]
 	path = pack/cynix/opt/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
-[submodule "pack/cynix/start/async.vim"]
-	path = pack/cynix/start/async.vim
-	url = https://github.com/prabirshrestha/async.vim.git
-[submodule "pack/cynix/start/asyncomplete.vim"]
-	path = pack/cynix/start/asyncomplete.vim
-	url = https://github.com/prabirshrestha/asyncomplete.vim.git
-[submodule "pack/cynix/start/asyncomplete-lsp.vim"]
-	path = pack/cynix/start/asyncomplete-lsp.vim
-	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
+[submodule "pack/cynix/opt/numbers.vim"]
+	path = pack/cynix/opt/numbers.vim
+	url = https://github.com/myusuf3/numbers.vim.git
+[submodule "pack/cynix/start/coc.nvim"]
+	path = pack/cynix/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/cynix/start/ConflictDetection"]
 	path = pack/cynix/start/ConflictDetection
 	url = https://github.com/vim-scripts/ConflictDetection.git
@@ -37,9 +34,6 @@
 [submodule "pack/cynix/start/lightline-buffer"]
 	path = pack/cynix/start/lightline-buffer
 	url = https://github.com/taohexxx/lightline-buffer.git
-[submodule "pack/cynix/start/numbers.vim"]
-	path = pack/cynix/start/numbers.vim
-	url = https://github.com/myusuf3/numbers.vim.git
 [submodule "pack/cynix/start/nvim-miniyank"]
 	path = pack/cynix/start/nvim-miniyank
 	url = https://github.com/bfredl/nvim-miniyank.git
@@ -67,15 +61,9 @@
 [submodule "pack/cynix/start/vim-fugitive"]
 	path = pack/cynix/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "pack/cynix/start/vim-gitgutter"]
-	path = pack/cynix/start/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "pack/cynix/start/vim-ingo-library"]
 	path = pack/cynix/start/vim-ingo-library
 	url = https://github.com/inkarkat/vim-ingo-library.git
-[submodule "pack/cynix/start/vim-lsp"]
-	path = pack/cynix/start/vim-lsp
-	url = https://github.com/prabirshrestha/vim-lsp.git
 [submodule "pack/cynix/start/vim-mundo"]
 	path = pack/cynix/start/vim-mundo
 	url = https://github.com/simnalamburt/vim-mundo.git

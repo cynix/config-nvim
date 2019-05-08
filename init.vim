@@ -16,6 +16,7 @@ set lazyredraw
 
   " line numbers {{{
   set numberwidth=5
+  packadd! numbers.vim
   " }}}
 
   " cursor crosshair {{{
@@ -156,6 +157,7 @@ let g:ConflictMotions_ConflictMapping='c'
   nnoremap \ <C-w>
   nnoremap \\ :b#<CR>
   nnoremap \d :bd<CR>
+  nnoremap <silent>\z :cclose<CR> :pclose<CR>
 
   " fzf
   nnoremap \b :Buffers<CR>
@@ -224,84 +226,74 @@ nnoremap <Right> :bnext<CR>
 " }}}
 
 " syntax/completion {{{
-  " asyncomplete.vim {{{
-  let g:asyncomplete_remove_duplicates=1
-  let g:asyncomplete_smart_completion=1
-  let g:asyncomplete_auto_popup=1
+  set updatetime=1000
 
-  inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  function! s:check_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
+  endfunction
+
+  inoremap <silent><expr><Tab>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_space() ? "\<Tab>" :
+        \ coc#refresh()
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
-  "}}}
-
-  " vim-lsp {{{
-  let g:lsp_signs_enabled=1
-  let g:lsp_diagnostics_echo_cursor=1
-
-  if executable('cquery')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery', '--log-file='.expand('~/.cache/cquery/cquery.log'), '--init={"cacheDirectory":"'.expand('~/.cache/cquery').'","index":{"comments":0}}']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-      \ })
-  endif
-
-  if executable('go-langserver')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-langserver',
-      \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-      \ 'whitelist': ['go'],
-      \ })
-  endif
-
-  if executable('pyls')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['pyls']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'setup.py'))},
-      \ 'whitelist': ['python'],
-      \ })
-  endif
-
-  nnoremap <silent><C-h> :LspHover<CR>
-  nnoremap <silent><C-j> :LspDefinition<CR>:normal! m`<CR>
-  nnoremap <silent><C-k> :LspReferences<CR>
-  nnoremap <silent><C-i> :LspImplementation<CR>
-  nnoremap <silent><F2> :LspRename<CR>
+  inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   nnoremap <silent><C-t> <C-o>
 
-  augroup LspSignColumn "{{{
-    autocmd!
+  " coc.nvim {{{
+  nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
+  nmap <silent><C-j> <Plug>(coc-definition)
+  nmap <silent><C-k> <Plug>(coc-references)
+  nmap <silent><C-i> <Plug>(coc-implementation)
+  nmap <silent><F2>  <Plug>(coc-rename)
 
-    autocmd User lsp_server_init setlocal signcolumn=yes
-    autocmd User lsp_server_exit setlocal signcolumn=auto
-  augroup END "}}}
+  augroup CoC
+    autocmd!
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup END
+
+  highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
+
+  if executable('ccls')
+    autocmd User CocNvimInit call coc#config('languageserver.ccls',
+          \ {
+          \   'command': 'ccls',
+          \   'args': ['--log-file='.expand('~/.cache/ccls.log')],
+          \   'filetypes': ['c', 'cpp', 'objc', 'objcpp'],
+          \   'rootPatterns': ['.ccls', 'compile_commands.json', '.git/'],
+          \   'initializationOptions': {
+          \     'cache': {
+          \       'directory': expand('~/.cache/ccls')
+          \     }
+          \   }
+          \ })
+  endif
   " }}}
 " }}}
 
 " lightline {{{
-function! LightlineFugitive() "{{{
-  if exists('*fugitive#head')
-    let branch = fugitive#head()
-    if branch !=# ''
-      return ' '.branch
-    endif
-    let commit = fugitive#head(7)
-    if commit !=# ''
-      return ' '.commit
-    endif
-  endif
-  return ''
+function! LightlineCurrentFunction() "{{{
+  return get(b:, 'coc_current_function', '')
+endfunction "}}}
+function! LightlineFileStatus() "{{{
+  return get(b:, 'coc_git_status', '')
 endfunction "}}}
 function! LightlineReadonly() "{{{
   return &readonly ? '' : ''
 endfunction "}}}
+function! LightlineRepoStatus() "{{{
+  return get(g:, 'coc_git_status', '')
+endfunction "}}}
+
 set noshowmode
 set showtabline=2
+
 let g:lightline = {
   \ 'active': {
-  \   'left': [['mode', 'paste'], ['fugitive', 'readonly', 'filename', 'modified']],
+  \   'left': [['mode', 'paste'], ['repostatus', 'readonly', 'filename', 'modified', 'filestatus', 'cocstatus'], ['currentfunction']],
   \ },
   \ 'colorscheme': 'gruvbox',
   \ 'component': {
@@ -314,8 +306,11 @@ let g:lightline = {
   \ },
   \ 'component_function': {
   \   'bufferinfo': 'lightline#buffer#bufferinfo',
-  \   'fugitive': 'LightlineFugitive',
+  \   'cocstatus': 'coc#status',
+  \   'currentfunction': 'LightlineCurrentFunction',
+  \   'filestatus': 'LightlineFileStatus',
   \   'readonly': 'LightlineReadonly',
+  \   'repostatus': 'LightlineRepoStatus',
   \ },
   \ 'component_type': {
   \   'buffercurrent': 'tabsel',
@@ -347,7 +342,7 @@ let g:lightline = {
 augroup RestoreCursorPosition "{{{
   autocmd!
 
-  au BufReadPost *
+  autocmd BufReadPost *
   \ if &filetype !~ 'commit\c' |
   \   if line("'\"") > 0 && line("'\"") <= line("$") |
   \     exe "normal! g`\"" |
@@ -391,7 +386,7 @@ augroup AutoCloseWindows "{{{
     \ endif
 
   " automatically close preview window
-  au CompleteDone * if pumvisible() == 0 | silent! pclose | endif
+  autocmd CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 augroup END "}}}
 
 augroup FastEscape "{{{

@@ -1,0 +1,24 @@
+{
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
+
+	"git.branchCharacter": "",
+
+	"languageserver": {
+		"go-langserver": {
+			"command": "go-langserver",
+			"filetypes": ["go"],
+			"rootPatterns": ["go.mod", ".git/"],
+			"initializationOptions": {
+				"gocodeCompletionEnabled": true,
+				"diagnosticsEnabled": true,
+				"lintTool": "golint"
+			}
+		},
+
+		"pyls": {
+			"command": "pyls",
+			"filetypes": ["python"],
+			"rootPatterns": ["setup.py", ".git/"]
+		}
+	}
+}
