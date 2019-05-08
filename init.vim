@@ -13,6 +13,7 @@ set title
 
 " display {{{
 set lazyredraw
+set shortmess+=c
 
   " line numbers {{{
   set numberwidth=5
@@ -226,7 +227,7 @@ nnoremap <Right> :bnext<CR>
 " }}}
 
 " syntax/completion {{{
-  set updatetime=1000
+  set updatetime=250
 
   function! s:check_space() abort
     let col = col('.') - 1
