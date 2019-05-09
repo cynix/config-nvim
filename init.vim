@@ -237,12 +237,15 @@ nnoremap <Right> :bnext<CR>
   inoremap <silent><expr><Tab>
         \ pumvisible() ? "\<C-n>" :
         \ <SID>check_space() ? "\<Tab>" :
-        \ coc#refresh()
+        \ coc#rpc#request('doKeymap', 'snippets-expand')
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   nnoremap <silent><C-t> <C-o>
 
   " coc.nvim {{{
+  let g:coc_snippet_next = '<Tab>'
+  let g:coc_snippet_prev = '<S-Tab>'
+
   nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
   nmap <silent><C-j> <Plug>(coc-definition)
   nmap <silent><C-k> <Plug>(coc-references)
