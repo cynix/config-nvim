@@ -236,8 +236,9 @@ nnoremap <Right> :bnext<CR>
 
   inoremap <silent><expr><Tab>
         \ pumvisible() ? "\<C-n>" :
+        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump', ''])\<CR>" :
         \ <SID>check_space() ? "\<Tab>" :
-        \ coc#rpc#request('doKeymap', 'snippets-expand')
+        \ coc#refresh()
   inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   nnoremap <silent><C-t> <C-o>
