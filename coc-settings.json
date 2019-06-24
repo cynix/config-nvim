@@ -2,8 +2,8 @@
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
 	"git.addGlameToVirtualText": true,
-	"git.branchCharacter": "",
-	"git.virtualTextPrefix": "        ⚡ ",
+	"git.branchCharacter": "\uf418",
+	"git.virtualTextPrefix": "        \uf415 ",
 
 	"languageserver": {
 		"go-langserver": {
