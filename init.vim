@@ -104,8 +104,9 @@ set formatoptions=roqnlmB1j
   vnoremap <S-Tab> <gv
   " }}}
 
-  " toggle paste mode {{{
+  " copy & paste {{{
   nnoremap <silent><Leader>p :set invpaste paste?<CR>
+  nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
   " }}}
 
   " commenting {{{
