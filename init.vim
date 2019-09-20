@@ -273,6 +273,9 @@ nnoremap <Right> :bnext<CR>
           \   'initializationOptions': {
           \     'cache': {
           \       'directory': expand('~/.cache/ccls')
+          \     },
+          \     'highlight': {
+          \       'lsRanges': true
           \     }
           \   }
           \ })
