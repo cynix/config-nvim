@@ -4,6 +4,9 @@
 [submodule "pack/cynix/opt/numbers.vim"]
 	path = pack/cynix/opt/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git
+[submodule "pack/cynix/start/auto-pairs"]
+	path = pack/cynix/start/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/cynix/start/coc.nvim"]
 	path = pack/cynix/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
@@ -25,9 +28,6 @@
 [submodule "pack/cynix/start/incsearch.vim"]
 	path = pack/cynix/start/incsearch.vim
 	url = https://github.com/haya14busa/incsearch.vim.git
-[submodule "pack/cynix/start/lexima.vim"]
-	path = pack/cynix/start/lexima.vim
-	url = https://github.com/cohama/lexima.vim.git
 [submodule "pack/cynix/start/lightline.vim"]
 	path = pack/cynix/start/lightline.vim
 	url = https://github.com/itchyny/lightline.vim.git

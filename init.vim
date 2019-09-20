@@ -273,9 +273,6 @@ nnoremap <Right> :bnext<CR>
           \   'initializationOptions': {
           \     'cache': {
           \       'directory': expand('~/.cache/ccls')
-          \     },
-          \     'highlight': {
-          \       'lsRanges': true
           \     }
           \   }
           \ })
@@ -412,26 +409,17 @@ augroup FSwitchConfig "{{{
   autocmd BufEnter *.h let b:fswitchdst='cc,cpp,c,mm,m'
 augroup END "}}}
 
-augroup PasteDisableLexima "{{{
+augroup PasteDisableAutoPairs "{{{
   autocmd!
 
-  autocmd InsertEnter * if &paste | let b:lexima_disabled=1 | endif
-  autocmd InsertLeave * if &paste | let b:lexima_disabled=0 | endif
+  autocmd InsertEnter * if &paste | let b:AutoPairs='' | endif
+  autocmd InsertLeave * if &paste | let b:AutoPairs=copy(g:AutoPairs) | endif
 augroup END "}}}
 
 runtime! init.vim.local
 
 packloadall
 silent! helptags ALL
-
-" lexima rules {{{
-call lexima#add_rule({'char': '(', 'at': '\%#\w'})
-call lexima#add_rule({'char': '(', 'at': '\%#[!~-]'})
-call lexima#add_rule({'char': '[', 'at': '\%#\w'})
-call lexima#add_rule({'char': '(', 'at': '\%#[[]'})
-call lexima#add_rule({'char': '{', 'at': '\%#\w'})
-call lexima#add_rule({'char': '{', 'at': '\%#[{]'})
-" }}}
 
 runtime! init.vim.local.late
 
