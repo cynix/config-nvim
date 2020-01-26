@@ -106,7 +106,6 @@ set formatoptions=roqnlmB1j
 
   " copy & paste {{{
   nnoremap <silent><Leader>p :set invpaste paste?<CR>
-  nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
   " }}}
 
   " commenting {{{
@@ -235,47 +234,52 @@ nnoremap <Right> :bnext<CR>
     return !col || getline('.')[col - 1] =~# '\s'
   endfunction
 
-  inoremap <silent><expr><Tab>
-        \ pumvisible() ? "\<C-n>" :
-        \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump', ''])\<CR>" :
-        \ <SID>check_space() ? "\<Tab>" :
-        \ coc#refresh()
-  inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-  nnoremap <silent><C-t> <C-o>
-
   " coc.nvim {{{
-  let g:coc_snippet_next = '<Tab>'
-  let g:coc_snippet_prev = '<S-Tab>'
+  if executable('node')
+    packadd! coc.nvim
 
-  nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
-  nmap <silent><C-j> <Plug>(coc-definition)
-  nmap <silent><C-k> <Plug>(coc-references)
-  nmap <silent><C-i> <Plug>(coc-implementation)
-  nmap <silent><F2>  <Plug>(coc-rename)
+    nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
+    inoremap <silent><expr><Tab>
+          \ pumvisible() ? "\<C-n>" :
+          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump', ''])\<CR>" :
+          \ <SID>check_space() ? "\<Tab>" :
+          \ coc#refresh()
+    inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    nnoremap <silent><C-t> <C-o>
 
-  augroup CoC
-    autocmd!
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup END
+    let g:coc_snippet_next = '<Tab>'
+    let g:coc_snippet_prev = '<S-Tab>'
 
-  highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
+    nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
+    nmap <silent><C-j> <Plug>(coc-definition)
+    nmap <silent><C-k> <Plug>(coc-references)
+    nmap <silent><C-i> <Plug>(coc-implementation)
+    nmap <silent><F2>  <Plug>(coc-rename)
 
-  if executable('ccls')
-    autocmd User CocNvimInit call coc#config('languageserver.ccls',
-          \ {
-          \   'command': 'ccls',
-          \   'args': ['--log-file='.expand('~/.cache/ccls.log')],
-          \   'filetypes': ['c', 'cpp', 'objc', 'objcpp'],
-          \   'rootPatterns': ['.ccls', 'compile_commands.json', '.git/'],
-          \   'initializationOptions': {
-          \     'cache': {
-          \       'directory': expand('~/.cache/ccls')
-          \     }
-          \   }
-          \ })
+    augroup CoC
+      autocmd!
+      autocmd CursorHold * silent call CocActionAsync('highlight')
+      autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
+      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup END
+
+    highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
+
+    if executable('ccls')
+      autocmd User CocNvimInit call coc#config('languageserver.ccls',
+            \ {
+            \   'command': 'ccls',
+            \   'args': ['--log-file='.expand('~/.cache/ccls.log')],
+            \   'filetypes': ['c', 'cpp', 'objc', 'objcpp'],
+            \   'rootPatterns': ['.ccls', 'compile_commands.json', '.git/'],
+            \   'initializationOptions': {
+            \     'cache': {
+            \       'directory': expand('~/.cache/ccls')
+            \     }
+            \   }
+            \ })
+    endif
   endif
   " }}}
 " }}}

@@ -8,7 +8,7 @@
 	path = pack/cynix/start/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/cynix/start/coc.nvim"]
-	path = pack/cynix/start/coc.nvim
+	path = pack/cynix/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/cynix/start/ConflictDetection"]
 	path = pack/cynix/start/ConflictDetection
