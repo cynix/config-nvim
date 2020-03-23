@@ -2,8 +2,13 @@ filetype plugin indent on
 syntax on
 
 let g:mapleader=','
+
+" allow using ` in tmux
 nnoremap ` '
 nnoremap ' `
+
+" quick escape
+inoremap jk <Esc>
 
 " terminal {{{
 set mouse=nv
