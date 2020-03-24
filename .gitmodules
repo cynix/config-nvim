@@ -55,6 +55,9 @@
 [submodule "pack/cynix/start/vim-easy-align"]
 	path = pack/cynix/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "pack/cynix/start/vim-easyescape"]
+	path = pack/cynix/start/vim-easyescape
+	url = https://github.com/zhou13/vim-easyescape.git
 [submodule "pack/cynix/start/vim-fswitch"]
 	path = pack/cynix/start/vim-fswitch
 	url = https://github.com/derekwyatt/vim-fswitch.git

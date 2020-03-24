@@ -7,9 +7,6 @@ let g:mapleader=','
 nnoremap ` '
 nnoremap ' `
 
-" quick escape
-inoremap jk <Esc>
-
 " terminal {{{
 set mouse=nv
 set termguicolors
