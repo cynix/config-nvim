@@ -1,7 +1,7 @@
 {
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
-	"git.addGlameToVirtualText": true,
+	"git.addGBlameToVirtualText": true,
 	"git.branchCharacter": "\uf418",
 	"git.virtualTextPrefix": "        \uf415 ",
 
