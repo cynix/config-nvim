@@ -4,9 +4,6 @@
 [submodule "pack/cynix/opt/numbers.vim"]
 	path = pack/cynix/opt/numbers.vim
 	url = https://github.com/myusuf3/numbers.vim.git
-[submodule "pack/cynix/start/auto-pairs"]
-	path = pack/cynix/start/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "pack/cynix/start/coc.nvim"]
 	path = pack/cynix/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git

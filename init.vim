@@ -247,7 +247,7 @@ nnoremap <Right> :bnext<CR>
           \ <SID>check_space() ? "\<Tab>" :
           \ coc#refresh()
     inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <silent><expr><CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <silent><expr><CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
     nnoremap <silent><C-t> <C-o>
 
     let g:coc_snippet_next = '<Tab>'
@@ -413,13 +413,6 @@ augroup FSwitchConfig "{{{
 
   autocmd BufEnter *.cc let b:fswitchdst='h,hh,hpp'
   autocmd BufEnter *.h let b:fswitchdst='cc,cpp,c,mm,m'
-augroup END "}}}
-
-augroup PasteDisableAutoPairs "{{{
-  autocmd!
-
-  autocmd InsertEnter * if &paste | let b:AutoPairs='' | endif
-  autocmd InsertLeave * if &paste | let b:AutoPairs=copy(g:AutoPairs) | endif
 augroup END "}}}
 
 runtime! init.vim.local
