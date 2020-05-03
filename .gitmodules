@@ -34,6 +34,9 @@
 [submodule "pack/cynix/start/nvim-miniyank"]
 	path = pack/cynix/start/nvim-miniyank
 	url = https://github.com/bfredl/nvim-miniyank.git
+[submodule "pack/cynix/start/pear-tree"]
+	path = pack/cynix/start/pear-tree
+	url = https://github.com/tmsvg/pear-tree.git
 [submodule "pack/cynix/start/securemodelines"]
 	path = pack/cynix/start/securemodelines
 	url = https://github.com/ciaranm/securemodelines.git

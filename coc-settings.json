@@ -1,6 +1,5 @@
 {
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
-	"coc.preferences.formatOnType": true,
 
 	"git.addGBlameToVirtualText": true,
 	"git.branchCharacter": "\uf418",
