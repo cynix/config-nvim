@@ -42,6 +42,7 @@ set shortmess+=c
   set textwidth=80
   set nowrap
   set linebreak
+  set colorcolumn=100
 
   function! ToggleWrap() "{{{
     if &wrap
@@ -214,6 +215,8 @@ nnoremap <Right> :bnext<CR>
   packadd! gruvbox
   colorscheme gruvbox
   " }}}
+
+  highlight ColorColumn ctermbg=236 guibg=#303030
 
   " vim-better-whitespace {{{
   let g:show_spaces_that_precede_tabs=1
