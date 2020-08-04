@@ -7,13 +7,13 @@
 
 	"languageserver": {
 		"go-langserver": {
-			"command": "go-langserver",
+			"command": "gopls",
 			"filetypes": ["go"],
 			"rootPatterns": ["go.mod", ".git/"],
 			"initializationOptions": {
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golint"
+				"completeUnimported": true,
+				"deepCompletion": true,
+				"usePlaceholders": true
 			}
 		},
 
