@@ -200,7 +200,7 @@ nnoremap <Right> :bnext<CR>
     if v:shell_error
       call fzf#vim#files('')
     else
-      call fzf#vim#gitfiles('')
+      call fzf#vim#gitfiles('--cached --others --exclude-standard')
     endif
   endfunction " }}}
   nnoremap <silent><C-p> :call MaybeGitFiles()<CR>
