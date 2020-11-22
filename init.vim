@@ -242,6 +242,7 @@ nnoremap <Right> :bnext<CR>
   " coc.nvim {{{
   if executable('node')
     packadd! coc.nvim
+    let g:coc_force_bundle=1
 
     nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
     inoremap <silent><expr><Tab>
