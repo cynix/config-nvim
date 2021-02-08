@@ -289,11 +289,8 @@ nnoremap <Right> :bnext<CR>
   endif
   " }}}
 
-  " pear-tree {{{
-  let g:pear_tree_repeatable_expand=0
-  let g:pear_tree_smart_openers=1
-  let g:pear_tree_smart_closers=1
-  let g:pear_tree_smart_backspace=1
+  " nvim-autopairs {{{
+  lua require('nvim-autopairs').setup()
   " }}}
 " }}}
 

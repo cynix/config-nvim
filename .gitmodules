@@ -31,6 +31,9 @@
 [submodule "pack/cynix/start/lightline-buffer"]
 	path = pack/cynix/start/lightline-buffer
 	url = https://github.com/taohexxx/lightline-buffer.git
+[submodule "pack/cynix/start/nvim-autopairs"]
+	path = pack/cynix/start/nvim-autopairs
+	url = https://github.com/windwp/nvim-autopairs.git
 [submodule "pack/cynix/start/nvim-miniyank"]
 	path = pack/cynix/start/nvim-miniyank
 	url = https://github.com/bfredl/nvim-miniyank.git
