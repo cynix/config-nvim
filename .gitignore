@@ -2,3 +2,4 @@ after/
 .netrwhist
 init.vim.local
 init.vim.local.late
+plugin/packer_compiled.vim
