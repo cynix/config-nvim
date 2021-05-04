@@ -18,8 +18,9 @@ set lazyredraw
 set shortmess+=c
 
   " line numbers {{{
+  set number
   set numberwidth=5
-  packadd! numbers.vim
+  packadd! vim-numbertoggle
   " }}}
 
   " cursor crosshair {{{
@@ -86,6 +87,10 @@ set shortmess+=c
   set foldmethod=marker
   nnoremap <silent><Space> @=(foldlevel('.')?'za':'30j')<CR>
   vnoremap <Space> zf
+  " }}}
+
+  " indent-blankline.nvim {{{
+  let g:indent_blankline_char='│'
   " }}}
 " }}}
 
@@ -229,133 +234,222 @@ nnoremap <Right> :bnext<CR>
   highlight link conflictSeparatorMarkerSymbol GruvboxRed
   highlight link conflictTheirsMarker GruvboxRed
   " }}}
+
+  " nvim-treesitter {{{
+  lua <<END
+    require('nvim-treesitter.configs').setup({
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+    })
+END
+  " }}}
 " }}}
 
 " syntax/completion {{{
   set updatetime=250
+
+  " nvim-compe {{{
+  set completeopt=menuone,noselect
+
+  lua <<END
+  require('compe').setup({
+    enabled = true,
+    autocomplete = true,
+    debug = false,
+    min_length = 1,
+    preselect = 'enable',
+    throttle_time = 80,
+    source_timeout = 200,
+    incomplete_delay = 400,
+    max_abbr_width = 100,
+    max_kind_width = 100,
+    max_menu_width = 100,
+    documentation = true,
+
+    source = {
+      path = false,
+      buffer = false,
+      calc = false,
+      nvim_lsp = true,
+      nvim_lua = true,
+      vsnip = true,
+    },
+  })
+END
 
   function! s:check_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~# '\s'
   endfunction
 
+  inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  nnoremap <silent><C-t> <C-o>
+  " }}}
+
   " coc.nvim {{{
-  if executable('node')
-    packadd! coc.nvim
-    let g:coc_force_bundle=1
+  " if executable('node')
+  "   packadd! coc.nvim
+  "   let g:coc_force_bundle=1
+  "
+  "   nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
+  "
+  "   let g:coc_snippet_next = '<Tab>'
+  "   let g:coc_snippet_prev = '<S-Tab>'
+  "
+  "   nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
+  "   nmap <silent><C-j> <Plug>(coc-definition)
+  "   nmap <silent><C-k> <Plug>(coc-references)
+  "   nmap <silent><C-i> <Plug>(coc-implementation)
+  "   nmap <silent><F2>  <Plug>(coc-rename)
+  "
+  "   highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
+  " endif
+  " }}}
 
-    nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
-    inoremap <silent><expr><Tab>
-          \ pumvisible() ? "\<C-n>" :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump', ''])\<CR>" :
-          \ <SID>check_space() ? "\<Tab>" :
-          \ coc#refresh()
-    inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <silent><expr><CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-    nnoremap <silent><C-t> <C-o>
+  " nvim-lspconfig {{{
+  lua <<END
+    local lspconfig = require('lspconfig')
 
-    let g:coc_snippet_next = '<Tab>'
-    let g:coc_snippet_prev = '<S-Tab>'
+    lspconfig.ccls.setup({
+      cmd = {'ccls', '--log-file=' .. os.getenv('HOME') .. '/.cache/ccls.log'},
+      init_options = {
+        cache = {
+          directory = os.getenv('HOME') .. '/.cache/ccls',
+        },
+      },
+      on_attach = on_attach,
+    })
+END
 
-    nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
-    nmap <silent><C-j> <Plug>(coc-definition)
-    nmap <silent><C-k> <Plug>(coc-references)
-    nmap <silent><C-i> <Plug>(coc-implementation)
-    nmap <silent><F2>  <Plug>(coc-rename)
+  nmap <silent><C-h> <Cmd>lua vim.lsp.buf.hover()<CR>
+  nmap <silent><C-j> <Cmd>lua vim.lsp.buf.definition()<CR>
+  nmap <silent><C-k> <Cmd>lua vim.lsp.buf.references()<CR>
+  nmap <silent><C-i> <Cmd>lua vim.lsp.buf.implementation()<CR>
+  nmap <silent><F2>  <Cmd>lua vim.lsp.buf.rename()<CR>
 
-    augroup CoC
-      autocmd!
-      autocmd CursorHold * silent call CocActionAsync('highlight')
-      autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
-      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup END
+  augroup LSP
+    autocmd!
+    autocmd CursorHold * lua vim.lsp.buf.document_highlight()
+    autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
+    autocmd CursorMoved * lua vim.lsp.buf.clear_references()
+  augroup END
+  " }}}
 
-    highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
-
-    if executable('ccls')
-      autocmd User CocNvimInit call coc#config('languageserver.ccls',
-            \ {
-            \   'command': 'ccls',
-            \   'args': ['--log-file='.expand('~/.cache/ccls.log')],
-            \   'filetypes': ['c', 'cpp', 'objc', 'objcpp'],
-            \   'rootPatterns': ['.ccls', 'compile_commands.json', '.git/'],
-            \   'initializationOptions': {
-            \     'cache': {
-            \       'directory': expand('~/.cache/ccls')
-            \     }
-            \   }
-            \ })
-    endif
-  endif
+  " lsp_signature.nvim {{{
+  lua <<END
+    require('lsp_signature').on_attach({
+      bind = true,
+      hint_enable = false,
+      handler_opts = {
+        border = 'single',
+      },
+    })
+END
   " }}}
 
   " nvim-autopairs {{{
-  lua require('nvim-autopairs').setup()
+  lua <<END
+  local autopairs = require('nvim-autopairs')
+  autopairs.setup()
+
+  vim.g.completion_confirm_key = ''
+
+  _G.completion_confirm = function()
+    if vim.fn.pumvisible() ~= 0 then
+      if vim.fn.complete_info()['selected'] ~= -1 then
+        return vim.fn['compe#confirm'](autopairs.esc('<CR>'))
+      else
+        return autopairs.esc('<CR>')
+      end
+    else
+      return autopairs.autopairs_cr()
+    end
+  end
+
+  vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.completion_confirm()', {expr=true, noremap=true})
+END
   " }}}
 " }}}
 
+" gitsigns.nvim {{{
+lua require('gitsigns').setup()
+" }}}
+
+" nvim-web-devicons {{{
+lua require('nvim-web-devicons').setup({default=true})
+" }}}
+
+" galaxyline.nvim {{{
+lua require('cynix.galaxyline')
+" }}}
+
 " lightline {{{
-function! LightlineCurrentFunction() "{{{
-  return get(b:, 'coc_current_function', '')
-endfunction "}}}
-function! LightlineFileStatus() "{{{
-  return get(b:, 'coc_git_status', '')
-endfunction "}}}
-function! LightlineReadonly() "{{{
-  return &readonly ? '' : ''
-endfunction "}}}
-function! LightlineRepoStatus() "{{{
-  return get(g:, 'coc_git_status', '')
-endfunction "}}}
-
-set noshowmode
-set showtabline=2
-
-let g:lightline = {
-  \ 'active': {
-  \   'left': [['mode', 'paste'], ['repostatus', 'readonly', 'filename', 'modified', 'filestatus', 'cocstatus'], ['currentfunction']],
-  \ },
-  \ 'colorscheme': 'gruvbox',
-  \ 'component': {
-  \   'lineinfo': ' %3l:%-2v',
-  \ },
-  \ 'component_expand': {
-  \   'buffercurrent': 'lightline#buffer#buffercurrent',
-  \   'bufferbefore': 'lightline#buffer#bufferbefore',
-  \   'bufferafter': 'lightline#buffer#bufferafter',
-  \ },
-  \ 'component_function': {
-  \   'bufferinfo': 'lightline#buffer#bufferinfo',
-  \   'cocstatus': 'coc#status',
-  \   'currentfunction': 'LightlineCurrentFunction',
-  \   'filestatus': 'LightlineFileStatus',
-  \   'readonly': 'LightlineReadonly',
-  \   'repostatus': 'LightlineRepoStatus',
-  \ },
-  \ 'component_type': {
-  \   'buffercurrent': 'tabsel',
-  \   'bufferbefore': 'raw',
-  \   'bufferafter': 'raw',
-  \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' },
-  \ 'tabline': {
-  \   'left': [['bufferinfo'], ['bufferbefore', 'buffercurrent', 'bufferafter']],
-  \   'right': [],
-  \ },
-  \ }
-
-  " lightline-buffer {{{
-  let g:lightline_buffer_readonly_icon=''
-  let g:lightline_buffer_modified_icon='+'
-  let g:lightline_buffer_git_icon=' '
-  let g:lightline_buffer_ellipsis_icon='…'
-  let g:lightline_buffer_expand_left_icon='◀ '
-  let g:lightline_buffer_expand_right_icon=' ▶'
-  let g:lightline_buffer_enable_devicons=1
-  let g:lightline_buffer_show_bufnr=1
-  let g:lightline_buffer_fname_mod=':t'
-  let g:lightline_buffer_maxflen=30
+" function! LightlineCurrentFunction() "{{{
+"   return get(b:, 'coc_current_function', '')
+" endfunction "}}}
+" function! LightlineFileStatus() "{{{
+"   return get(b:, 'coc_git_status', '')
+" endfunction "}}}
+" function! LightlineReadonly() "{{{
+"   return &readonly ? '' : ''
+" endfunction "}}}
+" function! LightlineRepoStatus() "{{{
+"   return get(g:, 'coc_git_status', '')
+" endfunction "}}}
+"
+" set noshowmode
+" set showtabline=2
+"
+" let g:lightline = {
+"   \ 'active': {
+"   \   'left': [['mode', 'paste'], ['repostatus', 'readonly', 'filename', 'modified', 'filestatus', 'cocstatus'], ['currentfunction']],
+"   \ },
+"   \ 'colorscheme': 'gruvbox',
+"   \ 'component': {
+"   \   'lineinfo': ' %3l:%-2v',
+"   \ },
+"   \ 'component_expand': {
+"   \   'buffercurrent': 'lightline#buffer#buffercurrent',
+"   \   'bufferbefore': 'lightline#buffer#bufferbefore',
+"   \   'bufferafter': 'lightline#buffer#bufferafter',
+"   \ },
+"   \ 'component_function': {
+"   \   'bufferinfo': 'lightline#buffer#bufferinfo',
+"   \   'cocstatus': 'coc#status',
+"   \   'currentfunction': 'LightlineCurrentFunction',
+"   \   'filestatus': 'LightlineFileStatus',
+"   \   'readonly': 'LightlineReadonly',
+"   \   'repostatus': 'LightlineRepoStatus',
+"   \ },
+"   \ 'component_type': {
+"   \   'buffercurrent': 'tabsel',
+"   \   'bufferbefore': 'raw',
+"   \   'bufferafter': 'raw',
+"   \ },
+"   \ 'separator': { 'left': '', 'right': '' },
+"   \ 'subseparator': { 'left': '', 'right': '' },
+"   \ 'tabline': {
+"   \   'left': [['bufferinfo'], ['bufferbefore', 'buffercurrent', 'bufferafter']],
+"   \   'right': [],
+"   \ },
+"   \ }
+"
+"   " lightline-buffer {{{
+"   let g:lightline_buffer_readonly_icon=''
+"   let g:lightline_buffer_modified_icon='+'
+"   let g:lightline_buffer_git_icon=' '
+"   let g:lightline_buffer_ellipsis_icon='…'
+"   let g:lightline_buffer_expand_left_icon='◀ '
+"   let g:lightline_buffer_expand_right_icon=' ▶'
+"   let g:lightline_buffer_enable_devicons=1
+"   let g:lightline_buffer_show_bufnr=1
+"   let g:lightline_buffer_fname_mod=':t'
+"   let g:lightline_buffer_maxflen=30
   " }}}
 " }}}
 
@@ -384,6 +478,9 @@ augroup FileTypeSpecific "{{{
   " }}}
   " html/xml {{{
   autocmd FileType html,xhtml,xml,xsd setlocal tabstop=2 shiftwidth=2 expandtab matchpairs+=<:>
+  " }}}
+  " lua {{{
+  autocmd FileType lua setlocal tabstop=2 shiftwidth=2 expandtab
   " }}}
   " ruby {{{
   autocmd FileType ruby,yaml setlocal tabstop=2 shiftwidth=2 expandtab
