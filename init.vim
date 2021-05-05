@@ -1,3 +1,5 @@
+lua require('plugins')
+
 filetype plugin indent on
 syntax on
 
@@ -15,12 +17,12 @@ set title
 
 " display {{{
 set lazyredraw
+set noshowmode
 set shortmess+=c
 
   " line numbers {{{
   set number
   set numberwidth=5
-  packadd! vim-numbertoggle
   " }}}
 
   " cursor crosshair {{{
@@ -80,17 +82,13 @@ set shortmess+=c
       inoremap <buffer><silent><End>  <C-o>g<End>
     endif
   endfunction "}}}
-  nnoremap <silent><Leader>r :call ToggleWrap()<CR>
+  nnoremap <silent><Leader>r <cmd>call ToggleWrap()<CR>
   " }}}
 
   " fold {{{
   set foldmethod=marker
   nnoremap <silent><Space> @=(foldlevel('.')?'za':'30j')<CR>
   vnoremap <Space> zf
-  " }}}
-
-  " indent-blankline.nvim {{{
-  let g:indent_blankline_char='│'
   " }}}
 " }}}
 
@@ -103,8 +101,8 @@ set virtualedit=block
 set formatoptions=roqnlmB1j
 
   " add blank line above/below {{{
-  nnoremap - :put=''<CR>
-  nnoremap + :put!=''<CR>
+  nnoremap - <cmd>put=''<CR>
+  nnoremap + <cmd>put!=''<CR>
   " }}}
 
   " visual mode indenting {{{
@@ -113,17 +111,7 @@ set formatoptions=roqnlmB1j
   " }}}
 
   " copy & paste {{{
-  nnoremap <silent><Leader>p :set invpaste paste?<CR>
-  " }}}
-
-  " commenting {{{
-  nmap <silent><Leader>// <Plug>TComment_gcc
-  xmap <silent>// <Plug>TComment_gc
-  " }}}
-
-  " aligning {{{
-  nmap ga <Plug>(EasyAlign)
-  xmap ga <Plug>(EasyAlign)
+  nnoremap <silent><Leader>p <cmd>set invpaste paste?<CR>
   " }}}
 " }}}
 
@@ -132,21 +120,16 @@ set ignorecase
 set smartcase
 set gdefault
 
-let g:incsearch#auto_nohlsearch=1
-map / <Plug>(incsearch-forward)\v
-map ? <Plug>(incsearch-backward)\v
-map n <Plug>(incsearch-nohl-n)zz
-map N <Plug>(incsearch-nohl-N)zz
-map * <Plug>(incsearch-nohl-*)zz
-map # <Plug>(incsearch-nohl-#)zz
+noremap / /\v
+noremap ? ?\v
 " }}}
 
 " diff {{{
 set diffopt+=context:3
 
-let g:ConflictMotions_ConflictBeginMapping='c'
-let g:ConflictMotions_ConflictEndMapping='C'
-let g:ConflictMotions_ConflictMapping='c'
+"let g:ConflictMotions_ConflictBeginMapping='c'
+"let g:ConflictMotions_ConflictEndMapping='C'
+"let g:ConflictMotions_ConflictMapping='c'
 " }}}
 
 " window/navigation {{{
@@ -166,16 +149,14 @@ let g:ConflictMotions_ConflictMapping='c'
   nnoremap \ <C-w>
   nnoremap \\ :b#<CR>
   nnoremap \d :bd<CR>
-  nnoremap <silent>\z :cclose<CR> :pclose<CR>
-
-  " fzf
-  nnoremap \b :Buffers<CR>
+  nnoremap <silent>\z <cmd>cclose<CR> <cmd>pclose<CR>
+  nnoremap <silent><C-t> <C-o>
 "}}}
 
 " buffer {{{
 set hidden
-nnoremap <Left> :bprev<CR>
-nnoremap <Right> :bnext<CR>
+nnoremap <Left> <cmd>bprev<CR>
+nnoremap <Right> <cmd>bnext<CR>
 " }}}
 
 " file {{{
@@ -190,267 +171,32 @@ nnoremap <Right> :bnext<CR>
 
   " modeline {{{
   set nomodeline
-  let g:secure_modelines_verbose=0
   " }}}
 
   " navigation {{{
   set wildignore+=.git,*.pyc,*.gz,*.bz2
-
-  " vim-fswitch
-  nnoremap <C-o> :FSHere<CR>
-
-  " fzf
-  function! MaybeGitFiles() " {{{
-    let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
-    if v:shell_error
-      call fzf#vim#files('')
-    else
-      call fzf#vim#gitfiles('--cached --others --exclude-standard')
-    endif
-  endfunction " }}}
-  nnoremap <silent><C-p> :call MaybeGitFiles()<CR>
-  " }}}
-" }}}
 
 " color/highlighting {{{
   " scheme {{{
   set background=dark
   let g:gruvbox_italic=1
   let g:gruvbox_vert_split='bg2'
-  packadd! gruvbox
   colorscheme gruvbox
   " }}}
 
   highlight ColorColumn ctermbg=236 guibg=#303030
 
-  " vim-better-whitespace {{{
-  let g:show_spaces_that_precede_tabs=1
-  highlight ExtraWhitespace ctermbg=88 guibg=#870000
-  " }}}
-
   " ConflictDetection {{{
-  highlight link conflictOursMarker GruvboxRed
-  highlight link conflictBaseMarker GruvboxRed
-  highlight link conflictSeparatorMarkerSymbol GruvboxRed
-  highlight link conflictTheirsMarker GruvboxRed
-  " }}}
-
-  " nvim-treesitter {{{
-  lua <<END
-    require('nvim-treesitter.configs').setup({
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
-    })
-END
+"  highlight link conflictOursMarker GruvboxRed
+"  highlight link conflictBaseMarker GruvboxRed
+"  highlight link conflictSeparatorMarkerSymbol GruvboxRed
+"  highlight link conflictTheirsMarker GruvboxRed
   " }}}
 " }}}
 
 " syntax/completion {{{
+  set completeopt=menuone,noinsert,noselect
   set updatetime=250
-
-  " nvim-compe {{{
-  set completeopt=menuone,noselect
-
-  lua <<END
-  require('compe').setup({
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = 'enable',
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-
-    source = {
-      path = false,
-      buffer = false,
-      calc = false,
-      nvim_lsp = true,
-      nvim_lua = true,
-      vsnip = true,
-    },
-  })
-END
-
-  function! s:check_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~# '\s'
-  endfunction
-
-  inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <silent><expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  nnoremap <silent><C-t> <C-o>
-  " }}}
-
-  " coc.nvim {{{
-  " if executable('node')
-  "   packadd! coc.nvim
-  "   let g:coc_force_bundle=1
-  "
-  "   nnoremap <silent><Space>p :<C-u>CocList -A --normal yank<CR>
-  "
-  "   let g:coc_snippet_next = '<Tab>'
-  "   let g:coc_snippet_prev = '<S-Tab>'
-  "
-  "   nmap <silent><C-h> :call CocActionAsync('doHover')<CR>
-  "   nmap <silent><C-j> <Plug>(coc-definition)
-  "   nmap <silent><C-k> <Plug>(coc-references)
-  "   nmap <silent><C-i> <Plug>(coc-implementation)
-  "   nmap <silent><F2>  <Plug>(coc-rename)
-  "
-  "   highlight CocHighlightText ctermfg=229 ctermbg=24 guifg=#fbf1c7 guibg=#005f87
-  " endif
-  " }}}
-
-  " nvim-lspconfig {{{
-  lua <<END
-    local lspconfig = require('lspconfig')
-
-    lspconfig.ccls.setup({
-      cmd = {'ccls', '--log-file=' .. os.getenv('HOME') .. '/.cache/ccls.log'},
-      init_options = {
-        cache = {
-          directory = os.getenv('HOME') .. '/.cache/ccls',
-        },
-      },
-      on_attach = on_attach,
-    })
-END
-
-  nmap <silent><C-h> <Cmd>lua vim.lsp.buf.hover()<CR>
-  nmap <silent><C-j> <Cmd>lua vim.lsp.buf.definition()<CR>
-  nmap <silent><C-k> <Cmd>lua vim.lsp.buf.references()<CR>
-  nmap <silent><C-i> <Cmd>lua vim.lsp.buf.implementation()<CR>
-  nmap <silent><F2>  <Cmd>lua vim.lsp.buf.rename()<CR>
-
-  augroup LSP
-    autocmd!
-    autocmd CursorHold * lua vim.lsp.buf.document_highlight()
-    autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
-    autocmd CursorMoved * lua vim.lsp.buf.clear_references()
-  augroup END
-  " }}}
-
-  " lsp_signature.nvim {{{
-  lua <<END
-    require('lsp_signature').on_attach({
-      bind = true,
-      hint_enable = false,
-      handler_opts = {
-        border = 'single',
-      },
-    })
-END
-  " }}}
-
-  " nvim-autopairs {{{
-  lua <<END
-  local autopairs = require('nvim-autopairs')
-  autopairs.setup()
-
-  vim.g.completion_confirm_key = ''
-
-  _G.completion_confirm = function()
-    if vim.fn.pumvisible() ~= 0 then
-      if vim.fn.complete_info()['selected'] ~= -1 then
-        return vim.fn['compe#confirm'](autopairs.esc('<CR>'))
-      else
-        return autopairs.esc('<CR>')
-      end
-    else
-      return autopairs.autopairs_cr()
-    end
-  end
-
-  vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.completion_confirm()', {expr=true, noremap=true})
-END
-  " }}}
-" }}}
-
-" gitsigns.nvim {{{
-lua require('gitsigns').setup()
-" }}}
-
-" nvim-web-devicons {{{
-lua require('nvim-web-devicons').setup({default=true})
-" }}}
-
-" galaxyline.nvim {{{
-lua require('cynix.galaxyline')
-" }}}
-
-" lightline {{{
-" function! LightlineCurrentFunction() "{{{
-"   return get(b:, 'coc_current_function', '')
-" endfunction "}}}
-" function! LightlineFileStatus() "{{{
-"   return get(b:, 'coc_git_status', '')
-" endfunction "}}}
-" function! LightlineReadonly() "{{{
-"   return &readonly ? '' : ''
-" endfunction "}}}
-" function! LightlineRepoStatus() "{{{
-"   return get(g:, 'coc_git_status', '')
-" endfunction "}}}
-"
-" set noshowmode
-" set showtabline=2
-"
-" let g:lightline = {
-"   \ 'active': {
-"   \   'left': [['mode', 'paste'], ['repostatus', 'readonly', 'filename', 'modified', 'filestatus', 'cocstatus'], ['currentfunction']],
-"   \ },
-"   \ 'colorscheme': 'gruvbox',
-"   \ 'component': {
-"   \   'lineinfo': ' %3l:%-2v',
-"   \ },
-"   \ 'component_expand': {
-"   \   'buffercurrent': 'lightline#buffer#buffercurrent',
-"   \   'bufferbefore': 'lightline#buffer#bufferbefore',
-"   \   'bufferafter': 'lightline#buffer#bufferafter',
-"   \ },
-"   \ 'component_function': {
-"   \   'bufferinfo': 'lightline#buffer#bufferinfo',
-"   \   'cocstatus': 'coc#status',
-"   \   'currentfunction': 'LightlineCurrentFunction',
-"   \   'filestatus': 'LightlineFileStatus',
-"   \   'readonly': 'LightlineReadonly',
-"   \   'repostatus': 'LightlineRepoStatus',
-"   \ },
-"   \ 'component_type': {
-"   \   'buffercurrent': 'tabsel',
-"   \   'bufferbefore': 'raw',
-"   \   'bufferafter': 'raw',
-"   \ },
-"   \ 'separator': { 'left': '', 'right': '' },
-"   \ 'subseparator': { 'left': '', 'right': '' },
-"   \ 'tabline': {
-"   \   'left': [['bufferinfo'], ['bufferbefore', 'buffercurrent', 'bufferafter']],
-"   \   'right': [],
-"   \ },
-"   \ }
-"
-"   " lightline-buffer {{{
-"   let g:lightline_buffer_readonly_icon=''
-"   let g:lightline_buffer_modified_icon='+'
-"   let g:lightline_buffer_git_icon=' '
-"   let g:lightline_buffer_ellipsis_icon='…'
-"   let g:lightline_buffer_expand_left_icon='◀ '
-"   let g:lightline_buffer_expand_right_icon=' ▶'
-"   let g:lightline_buffer_enable_devicons=1
-"   let g:lightline_buffer_show_bufnr=1
-"   let g:lightline_buffer_fname_mod=':t'
-"   let g:lightline_buffer_maxflen=30
-  " }}}
 " }}}
 
 augroup RestoreCursorPosition "{{{
@@ -513,18 +259,7 @@ augroup FastEscape "{{{
   autocmd InsertLeave * set timeoutlen=1000
 augroup END "}}}
 
-augroup FSwitchConfig "{{{
-  autocmd!
-
-  autocmd BufEnter *.cc let b:fswitchdst='h,hh,hpp'
-  autocmd BufEnter *.h let b:fswitchdst='cc,cpp,c,mm,m'
-augroup END "}}}
-
 runtime! init.vim.local
-
-packloadall
 silent! helptags ALL
-
-runtime! init.vim.local.late
 
 " vim: tabstop=2 shiftwidth=2 expandtab
