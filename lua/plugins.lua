@@ -3,7 +3,7 @@ local function load(use)
   use {'famiu/nvim-reload', requires={'nvim-lua/plenary.nvim'}}
 
   -- themes {{{
-  use {'npxbr/gruvbox.nvim', requires={'rktjmp/lush.nvim'}}
+  use {'npxbr/gruvbox.nvim', requires={'rktjmp/lush.nvim'}, config=[[require('config.gruvbox')]]}
   -- }}}
 
   -- visual {{{

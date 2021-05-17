@@ -177,13 +177,6 @@ nnoremap <Right> <cmd>bnext<CR>
   set wildignore+=.git,*.pyc,*.gz,*.bz2
 
 " color/highlighting {{{
-  " scheme {{{
-  set background=dark
-  let g:gruvbox_italic=1
-  let g:gruvbox_vert_split='bg2'
-  colorscheme gruvbox
-  " }}}
-
   highlight ColorColumn ctermbg=236 guibg=#303030
 
   " ConflictDetection {{{
