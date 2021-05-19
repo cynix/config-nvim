@@ -2,10 +2,6 @@ local function load(use)
   use 'wbthomason/packer.nvim'
   use {'famiu/nvim-reload', requires={'nvim-lua/plenary.nvim'}}
 
-  -- themes {{{
-  use {'npxbr/gruvbox.nvim', requires={'rktjmp/lush.nvim'}, config=[[require('config.gruvbox')]]}
-  -- }}}
-
   -- visual {{{
   use 'bronson/vim-crosshairs'
   use {'lukas-reineke/indent-blankline.nvim', branch='lua', config=[[require('config.indent-blankline')]]}
@@ -68,6 +64,10 @@ local function load(use)
 
   -- git {{{
   use {'f-person/git-blame.nvim', config=[[require('config.git-blame')]]}
+  -- }}}
+
+  -- themes {{{
+  use {'npxbr/gruvbox.nvim', requires={'rktjmp/lush.nvim'}, config=[[require('config.gruvbox')]]}
   -- }}}
 end
 
