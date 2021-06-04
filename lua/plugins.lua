@@ -24,7 +24,7 @@ local function load(use)
   use 'tpope/vim-surround'
   use {'windwp/nvim-autopairs', config=[[require('config.autopairs')]]}
   use {'b3nj5m1n/kommentary', config=[[require('config.kommentary')]]}
-  use {'mkotha/conflict3', config=[[require('config.conflict3')]]}
+  use {'rhysd/conflict-marker.vim', config=[[require('config.conflict-marker')]]}
   -- }}}
 
   -- yank/paste {{{
