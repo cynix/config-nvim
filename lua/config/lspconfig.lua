@@ -1,5 +1,4 @@
 local u = require('utils.text').u
-local hl = require('utils.highlight').hl
 
 local lspconfig = require('lspconfig')
 local on_attach = require('lsp').on_attach
@@ -46,7 +45,3 @@ local def = vim.fn.sign_define
 for sign, text in pairs(signs) do
   def(sign, {text=text, texthl=sign})
 end
-
-hl {'LspReferenceText', fg='#fbf1c7', bg='#005f87'}
-hl {'LspReferenceRead', 'LspReferenceText'}
-hl {'LspReferenceWrite', 'LspReferenceText'}
