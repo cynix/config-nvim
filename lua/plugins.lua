@@ -4,7 +4,7 @@ local function load(use)
 
   -- visual {{{
   use 'bronson/vim-crosshairs'
-  use {'lukas-reineke/indent-blankline.nvim', branch='lua', config=[[require('config.indent-blankline')]]}
+  use {'lukas-reineke/indent-blankline.nvim', config=[[require('config.indent-blankline')]]}
   use {'kyazdani42/nvim-web-devicons', config=[[require('config.web-devicons')]]}
   use {'ntpeters/vim-better-whitespace', config=[[require('config.better-whitespace')]]}
   -- }}}
@@ -24,7 +24,7 @@ local function load(use)
   use 'tpope/vim-surround'
   use {'windwp/nvim-autopairs', config=[[require('config.autopairs')]]}
   use {'b3nj5m1n/kommentary', config=[[require('config.kommentary')]]}
-  use {'rhysd/conflict-marker.vim', config=[[require('config.conflict-marker')]]}
+  use {'cynix/vim-mergetool', config=[[require('config.mergetool')]]}
   -- }}}
 
   -- yank/paste {{{
