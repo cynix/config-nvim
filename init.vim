@@ -255,4 +255,7 @@ augroup END "}}}
 runtime! init.vim.local
 silent! helptags ALL
 
+set exrc
+set secure
+
 " vim: tabstop=2 shiftwidth=2 expandtab
