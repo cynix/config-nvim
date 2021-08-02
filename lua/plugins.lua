@@ -67,7 +67,7 @@ local function load(use)
   -- }}}
 
   -- themes {{{
-  use {'npxbr/gruvbox.nvim', requires={'rktjmp/lush.nvim'}, config=[[require('config.gruvbox')]]}
+  use {'lifepillar/vim-gruvbox8', config=[[require('config.gruvbox8')]]}
   -- }}}
 end
 
