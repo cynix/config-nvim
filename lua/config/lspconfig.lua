@@ -12,6 +12,9 @@ lspconfig.ccls.setup({
     cache = {
       directory = os.getenv('HOME') .. '/.cache/ccls',
     },
+    index = {
+      blacklist = {'.git'}
+    },
   },
   on_attach = on_attach,
   capabilities = caps,
