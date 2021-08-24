@@ -4,7 +4,26 @@ if require('utils.fs').exists(cpp) then
 end
 
 local config = {
-  ensure_installed = 'maintained',
+  ensure_installed = {
+    'bash',
+    'c',
+    'cmake',
+    'cpp',
+    'dockerfile',
+    'fish',
+    'go',
+    'gomod',
+    'html',
+    'java',
+    'javascript',
+    'json',
+    'lua',
+    'python',
+    'ruby',
+    'scss',
+    'toml',
+    'yaml',
+  },
   autopairs = {
     enable = true,
   },
