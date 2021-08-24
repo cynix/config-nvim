@@ -5,7 +5,7 @@ local make_text_document_params = require('vim.lsp.util').make_text_document_par
 local buf_request = require('vim.lsp').buf_request
 local redraw = require('utils.redraw').redraw
 
-local symbol_kinds = {
+local interesting_kinds = {
   Module = true,
   Namespace = true,
   Package = true,
@@ -47,19 +47,31 @@ local function callback(_, _, result, _, _)
   local pos = get_cursor(0)
   local symbols = {}
 
-  for _, item in ipairs(result) do
+  local function maybe_add(item)
     local kind = SymbolKind[item.kind] or 'Unknown'
-    if symbol_kinds[kind] then
-      local range = item.range
+
+    if interesting_kinds[kind] then
+      local range = item.location and item.location.range or item.range
+
       if range then
         range.start.line = range.start.line + 1
         range['end'].line = range['end'].line + 1
 
         if in_range(pos, range) then
-          table.insert(symbols, {name=item.detail or item.name, kind=kind})
+          table.insert(symbols, {name=item.name, kind=kind})
         end
       end
     end
+
+    if item.children then
+      for _, child in ipairs(item.children) do
+        maybe_add(child)
+      end
+    end
+  end
+
+  for _, item in ipairs(result) do
+    maybe_add(item)
   end
 
   if #symbols > 0 then
