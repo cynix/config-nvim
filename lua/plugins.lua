@@ -49,7 +49,7 @@ local function load(use)
     requires={'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'},
     config=[[require('config.cmp')]],
   }
-  use {'folke/lsp-trouble.nvim', config=[[require('config.lsp-trouble')]]}
+  use {'folke/trouble.nvim', config=[[require('config.trouble')]]}
   use {'kosayoda/nvim-lightbulb', config=[[require('config.lightbulb')]]}
   -- }}}
 
