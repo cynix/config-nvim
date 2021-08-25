@@ -1,4 +1,7 @@
-vim.g.indent_blankline_char = '│'
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_end_of_line = true
-vim.g.indent_blankline_buftype_exclude = {'help', 'nofile'}
+require('indent_blankline').setup({
+  char = '│',
+  buftype_exclude = {'help', 'nofile', 'terminal'},
+  filetype_exclude = {'help', 'packer'},
+  show_current_context = true,
+  show_end_of_line = true,
+})
