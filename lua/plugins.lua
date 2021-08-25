@@ -45,9 +45,9 @@ local function load(use)
   use {'neovim/nvim-lspconfig', config=[[require('config.lspconfig')]]}
   use {'ray-x/lsp_signature.nvim', config=[[require('config.lsp_signature')]]}
   use {
-    'hrsh7th/nvim-compe',
-    requires={'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'},
-    config=[[require('config.compe')]],
+    'hrsh7th/nvim-cmp',
+    requires={'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'},
+    config=[[require('config.cmp')]],
   }
   use {'folke/lsp-trouble.nvim', config=[[require('config.lsp-trouble')]]}
   use {'kosayoda/nvim-lightbulb', config=[[require('config.lightbulb')]]}
