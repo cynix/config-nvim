@@ -4,4 +4,5 @@ require('indent_blankline').setup({
   filetype_exclude = {'help', 'packer'},
   show_current_context = true,
   show_end_of_line = true,
+  use_treesitter = true,
 })
