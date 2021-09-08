@@ -22,9 +22,6 @@ lspconfig.ccls.setup({
     client = {
       snippetSupport = true,
     },
-    index = {
-      blacklist = {'.git'}
-    },
   },
   on_attach = on_attach,
   capabilities = caps,
