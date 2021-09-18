@@ -51,6 +51,7 @@ local function load(use)
   }
   use {'folke/trouble.nvim', config=[[require('config.trouble')]]}
   use {'kosayoda/nvim-lightbulb', config=[[require('config.lightbulb')]]}
+  use {'m-pilia/vim-ccls', config=[[require('config.ccls')]]}
   -- }}}
 
   -- status {{{
