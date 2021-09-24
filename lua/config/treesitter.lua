@@ -1,6 +1,6 @@
 local cpp = require('nvim-treesitter.parsers').get_parser_configs().cpp.install_info
-cpp.url = 'https://github.com/cynix/tree-sitter-cpp.git'
-cpp.revision = 'd18734042ab7205f8a1a612617ad4d5a713da9db'
+cpp.url = 'https://github.com/tree-sitter/tree-sitter-cpp.git'
+cpp.revision = '977dc3a960da5e9a2baec95160f661092466df46'
 
 local config = {
   ensure_installed = {
