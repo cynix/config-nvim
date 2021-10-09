@@ -2,7 +2,6 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 local feedkeys = vim.fn.feedkeys
-local pumvisible = vim.fn.pumvisible
 
 local t = require('utils.text').t
 
@@ -10,7 +9,7 @@ cmp.setup({
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Tab>'] = function(fallback)
-        if pumvisible() == 1 then
+        if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           feedkeys(t'<Plug>luasnip-expand-or-jump', '')
@@ -19,7 +18,7 @@ cmp.setup({
         end
       end,
     ['<S-Tab>'] = function(fallback)
-        if pumvisible() == 1 then
+        if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
           feedkeys(t'<Plug>luasnip-jump-prev', '')

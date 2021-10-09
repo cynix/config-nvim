@@ -3,15 +3,10 @@ local u = require('utils.text').u
 local lspconfig = require('lspconfig')
 local on_attach = require('lsp').on_attach
 
-local caps = vim.lsp.protocol.make_client_capabilities()
-caps.textDocument.completion.completionItem.commitCharactersSupport = true
-caps.textDocument.completion.completionItem.deprecatedSupport = true
-caps.textDocument.completion.completionItem.insertReplaceSupport = true
-caps.textDocument.completion.completionItem.labelDetailsSupport = true
-caps.textDocument.completion.completionItem.preselectSupport = true
-caps.textDocument.completion.completionItem.resolveSupport = {properties={'additionalTextEdits', 'detail', 'documentation'}}
-caps.textDocument.completion.completionItem.snippetSupport = true
-caps.textDocument.completion.completionItem.tagSupport = {valueSet={1}}
+local cmp = require('cmp_nvim_lsp')
+cmp.setup()
+
+local caps = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lspconfig.ccls.setup({
   cmd = {'ccls', '--log-file=' .. os.getenv('HOME') .. '/.cache/ccls.log'},
