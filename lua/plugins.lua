@@ -13,9 +13,9 @@ local function load(use)
   use {'derekwyatt/vim-fswitch', config=[[require('config.fswitch')]]}
   use {'haya14busa/is.vim'}
   use {
-    'nvim-telescope/telescope.nvim',
-    requires={'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim'},
-    config=[[require('config.telescope')]],
+    'ibhagwan/fzf-lua',
+    requires={'vijaymarupudi/nvim-fzf'},
+    config=[[require('config.fzf')]],
   }
   -- }}}
 
