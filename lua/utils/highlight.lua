@@ -9,7 +9,7 @@ end
 
 local function hl(def)
   local cmd = 'highlight'
-  if def.bang == true then cmd = cmd .. '!' end
+  if def.bang ~= false then cmd = cmd .. '!' end
 
   if #def == 2 and type(def[1]) == 'string' and type(def[2]) == 'string' then
     vim.cmd(cmd .. ' link ' .. def[1] .. ' ' .. def[2])

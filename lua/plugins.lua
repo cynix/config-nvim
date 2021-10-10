@@ -60,11 +60,10 @@ local function load(use)
 
   -- gutter {{{
   use 'jeffkreeftmeijer/vim-numbertoggle'
-  use {'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim'}, config=[[require('config.gitsigns')]]}
   -- }}}
 
   -- git {{{
-  use {'f-person/git-blame.nvim', config=[[require('config.git-blame')]]}
+  use {'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim'}, config=[[require('config.gitsigns')]]}
   -- }}}
 
   -- themes {{{
