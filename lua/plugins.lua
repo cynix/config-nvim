@@ -41,6 +41,7 @@ local function load(use)
     run=[[require('hooks.treesitter')]],
   }
   use 'nvim-treesitter/playground'
+  use {'romgrk/nvim-treesitter-context', config=[[require('config.treesitter-context')]]}
 
   use {'nvim-lua/lsp-status.nvim', config=[[require('config.lsp-status')]]}
   use {'neovim/nvim-lspconfig', config=[[require('config.lspconfig')]]}
