@@ -87,7 +87,7 @@ local function bootstrap()
   vim.api.nvim_exec([[
     augroup Packer
       autocmd!
-      autocmd BufWritePost plugins.lua PackerCompile
+      autocmd BufWritePost ~/.config/nvim/*.lua PackerCompile
     augroup end
   ]], false)
 
