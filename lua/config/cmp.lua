@@ -6,6 +6,9 @@ local feedkeys = vim.fn.feedkeys
 local t = require('utils.text').t
 
 cmp.setup({
+  formatting = {
+    format = require('lspkind').cmp_format({with_text=false}),
+  },
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Tab>'] = function(fallback)

@@ -14,10 +14,9 @@ local config = {
     },
     lualine_c = {
       {'filename', path=1, symbols={modified=' ' .. u'f040', readonly=' ' .. u'f023'}},
-      function() return vim.b.lsp_current_function end,
+      require('lsp-status').status,
     },
     lualine_x = {
-      {'diagnostics', sources={'nvim_lsp'}},
       'encoding',
       'fileformat',
       'filetype'

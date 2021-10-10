@@ -1,5 +1,5 @@
 local exec = vim.api.nvim_exec
-local current_function = require('lsp.current_function').on_attach
+local lsp_status = require('lsp-status').on_attach
 
 local function on_attach(client, bufnr)
   exec([[
@@ -17,7 +17,7 @@ local function on_attach(client, bufnr)
     augroup END
   ]], false)
 
-  current_function(client, bufnr)
+  lsp_status(client)
 end
 
 return {
