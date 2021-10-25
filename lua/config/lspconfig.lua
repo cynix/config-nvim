@@ -8,16 +8,7 @@ cmp.setup()
 
 local caps = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lspconfig.ccls.setup({
-  cmd = {'ccls', '--log-file=' .. os.getenv('HOME') .. '/.cache/ccls.log'},
-  init_options = {
-    cache = {
-      directory = os.getenv('HOME') .. '/.cache/ccls',
-    },
-    client = {
-      snippetSupport = true,
-    },
-  },
+lspconfig.clangd.setup({
   on_attach = on_attach,
   capabilities = caps,
 })
