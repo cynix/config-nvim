@@ -57,7 +57,7 @@ local function load(use)
   -- }}}
 
   -- status {{{
-  use {'hoob3rt/lualine.nvim', config=[[require('config.lualine')]]}
+  use {'nvim-lualine/lualine.nvim', config=[[require('config.lualine')]]}
   -- }}}
 
   -- gutter {{{
