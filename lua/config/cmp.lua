@@ -29,6 +29,7 @@ cmp.setup({
           fallback()
         end
       end,
+    ['<CR>'] = cmp.mapping.confirm(),
   },
   snippet = {
     expand = function(args)
@@ -40,5 +41,3 @@ cmp.setup({
     {name='luasnip'},
   },
 })
-
-require('nvim-autopairs.completion.cmp').setup()
