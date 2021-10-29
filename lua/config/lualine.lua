@@ -14,7 +14,7 @@ local config = {
     },
     lualine_c = {
       {'filename', path=1, symbols={modified=' ' .. u'f040', readonly=' ' .. u'f023'}},
-      require('lsp-status').status,
+      [[require('lsp-status').status()]],
     },
     lualine_x = {
       'encoding',
