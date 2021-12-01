@@ -42,10 +42,10 @@ set shortmess+=c
   " }}}
 
   " wrap {{{
-  set textwidth=100
+  set textwidth=120
   set nowrap
   set linebreak
-  set colorcolumn=100
+  set colorcolumn=120
 
   function! ToggleWrap() "{{{
     if &wrap
