@@ -41,7 +41,7 @@ local function select_one(fn)
 end
 
 local handlers = vim.lsp.handlers
-handlers['textDocument/codeAction'] = select_one(fzf.lsp_code_actions)
+handlers['textDocument/codeAction'] = fzf.lsp_code_actions
 handlers['textDocument/definition'] = select_one(fzf.lsp_definitions)
 handlers['textDocument/implementation'] = select_one(fzf.lsp_implementations)
 handlers['textDocument/references'] = select_one(fzf.lsp_references)
