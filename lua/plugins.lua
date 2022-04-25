@@ -45,15 +45,13 @@ local function load(use)
 
   use {'nvim-lua/lsp-status.nvim', config=[[require('config.lsp-status')]]}
   use {'neovim/nvim-lspconfig', config=[[require('config.lspconfig')]]}
-  use {'ray-x/lsp_signature.nvim', config=[[require('config.lsp_signature')]]}
   use {
     'hrsh7th/nvim-cmp',
-    requires={'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'onsails/lspkind-nvim', 'saadparwaiz1/cmp_luasnip'},
+    requires={'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lsp-signature-help', 'L3MON4D3/LuaSnip', 'onsails/lspkind-nvim', 'saadparwaiz1/cmp_luasnip'},
     config=[[require('config.cmp')]],
   }
   use {'folke/trouble.nvim', config=[[require('config.trouble')]]}
   use {'kosayoda/nvim-lightbulb', config=[[require('config.lightbulb')]]}
-  use {'m-pilia/vim-ccls', config=[[require('config.ccls')]]}
   -- }}}
 
   -- status {{{
