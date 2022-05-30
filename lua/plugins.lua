@@ -76,7 +76,7 @@ local function bootstrap()
   local cmd = vim.api.nvim_command
 
   local path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  local boot = not require('utils.fs').exists(path)
+  local boot = not require('utils.path').exists(path)
 
   if boot then
     fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', path})
@@ -94,7 +94,7 @@ local function bootstrap()
   require('packer').startup(load)
 
   if boot then
-    cmd('PackerSync')
+    require('packer').sync()
   end
 end
 

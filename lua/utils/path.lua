@@ -1,7 +1,12 @@
-local executable = vim.fn.executable
+local fn = vim.fn
+local executable = fn.executable
 local path = require('lspconfig/util').path
 
 local M = {}
+
+M.exists = function(p)
+  return fn.empty(fn.glob(p)) == 0
+end
 
 M.join = path.join
 
