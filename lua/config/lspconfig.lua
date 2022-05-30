@@ -1,3 +1,4 @@
+local path = require('utils.path')
 local u = require('utils.text').u
 
 local lspconfig = require('lspconfig')
@@ -31,6 +32,15 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.pyright.setup({
+  before_init = function(_, config)
+    local p
+    if vim.env.VIRTUAL_ENV then
+      p = path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+    else
+      p = path.find_cmd('python', '.venv/bin', config.root_dir)
+    end
+    config.settings.python.pythonPath = p
+  end,
   on_attach = on_attach,
   capabilities = caps,
 })
