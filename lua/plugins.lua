@@ -44,7 +44,11 @@ local function load(use)
   use {'romgrk/nvim-treesitter-context', config=[[require('config.treesitter-context')]]}
 
   use {'nvim-lua/lsp-status.nvim', config=[[require('config.lsp-status')]]}
-  use {'neovim/nvim-lspconfig', config=[[require('config.lspconfig')]]}
+  use {
+    'neovim/nvim-lspconfig',
+    requires={'p00f/clangd_extensions.nvim'},
+    config=[[require('config.lspconfig')]],
+  }
   use {
     'hrsh7th/nvim-cmp',
     requires={'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lsp-signature-help', 'L3MON4D3/LuaSnip', 'onsails/lspkind-nvim', 'saadparwaiz1/cmp_luasnip'},

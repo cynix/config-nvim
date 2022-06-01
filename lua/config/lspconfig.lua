@@ -9,15 +9,17 @@ cmp.setup()
 
 local caps = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lspconfig.clangd.setup({
-  cmd = {
-    'clangd',
-    '--background-index',
-    '--completion-style=bundled',
-    '--inlay-hints',
+require('clangd_extensions').setup({
+  server = {
+    cmd = {
+      'clangd',
+      '--background-index',
+      '--completion-style=bundled',
+      '--inlay-hints',
+    },
+    on_attach = on_attach,
+    capabilities = caps,
   },
-  on_attach = on_attach,
-  capabilities = caps,
 })
 
 lspconfig.gopls.setup({
