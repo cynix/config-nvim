@@ -1,15 +1,19 @@
 local exec = vim.api.nvim_exec
+local map = vim.keymap.set
 local lsp_status = require('lsp-status').on_attach
 
 local function on_attach(client, bufnr)
-  exec([[
-    nmap <silent><C-h> <cmd>lua vim.lsp.buf.hover()<CR>
-    nmap <silent><C-i> <cmd>lua vim.lsp.buf.implementation()<CR>
-    nmap <silent><C-j> <cmd>lua vim.lsp.buf.definition()<CR>
-    nmap <silent><C-k> <cmd>lua vim.lsp.buf.references()<CR>
-    nmap <silent><C-l> <cmd>lua vim.lsp.buf.code_action()<CR>
-    nmap <silent><F2>  <cmd>lua vim.lsp.buf.rename()<CR>
+  local buf = vim.lsp.buf
+  local opts = {buffer=bufnr, noremap=true, silent=true}
 
+  map('n', '<C-h>', buf.hover, opts)
+  map('n', '<C-i>', buf.implementation, opts)
+  map('n', '<C-j>', buf.definition, opts)
+  map('n', '<C-k>', buf.references, opts)
+  map('n', '<C-l>', buf.code_action, opts)
+  map('n', '<F2>', buf.rename, opts)
+
+  exec([[
     augroup LspHighlighting
       autocmd!
       autocmd CursorHold * lua vim.lsp.buf.document_highlight()
