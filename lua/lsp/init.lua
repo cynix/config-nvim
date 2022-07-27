@@ -7,7 +7,7 @@ local function on_attach(client, bufnr)
   local opts = {buffer=bufnr, noremap=true, silent=true}
 
   map('n', '<C-h>', buf.hover, opts)
-  map('n', '<C-i>', buf.implementation, opts)
+  map('n', '<C-n>', buf.implementation, opts)
   map('n', '<C-j>', buf.definition, opts)
   map('n', '<C-k>', buf.references, opts)
   map('n', '<C-l>', buf.code_action, opts)
