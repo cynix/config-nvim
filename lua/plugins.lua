@@ -56,6 +56,7 @@ local function load(use)
   }
   use {'folke/trouble.nvim', config=[[require('config.trouble')]]}
   use {'kosayoda/nvim-lightbulb', config=[[require('config.lightbulb')]]}
+  use {'https://git.sr.ht/~whynothugo/lsp_lines.nvim', config=[[require('config.lsp_lines')]]}
   -- }}}
 
   -- status {{{
