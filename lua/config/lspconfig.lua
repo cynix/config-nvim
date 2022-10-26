@@ -7,7 +7,7 @@ local on_attach = require('lsp').on_attach
 local cmp = require('cmp_nvim_lsp')
 cmp.setup()
 
-local caps = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local caps = cmp.default_capabilities()
 
 require('clangd_extensions').setup({
   server = {
