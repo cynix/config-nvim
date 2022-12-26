@@ -71,6 +71,10 @@ local function load(use)
   use {'lewis6991/gitsigns.nvim', requires={'nvim-lua/plenary.nvim'}, config=[[require('config.gitsigns')]]}
   -- }}}
 
+  -- misc {{{
+  use {'echasnovski/mini.nvim', config=[[require('config.mini')]]}
+  -- }}}
+
   -- themes {{{
   use {'lifepillar/vim-gruvbox8', config=[[require('config.gruvbox8')]]}
   -- }}}
