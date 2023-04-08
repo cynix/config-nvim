@@ -1,5 +1,5 @@
-after/
-.netrwhist
-init.vim.local
-init.vim.local.late
-plugin/packer_compiled.*
+lazy-lock.json
+lua/config/local/
+lua/config/local.lua
+lua/plugins/local/
+lua/plugins/local.lua
