@@ -17,7 +17,7 @@ return {
       autoformat = false,
       servers = {
         clangd = {
-          cmd = { 'clangd', '--background-index', '--completion-style=bundled', '--inlay-hints' },
+          cmd = { 'clangd', '--background-index', '--completion-style=bundled', '--inlay-hints', '--log=error' },
           mason = false,
         },
         gopls = {
