@@ -78,7 +78,14 @@ return {
       },
       setup = {
         clangd = function(_, opts)
-          require('clangd_extensions').setup({server=opts})
+          require('clangd_extensions').setup({
+            server = opts,
+            extensions = {
+              inlay_hints = {
+                parameter_hints_prefix = ' <- ',
+              },
+            },
+          })
           return true
         end,
       }

@@ -7,7 +7,10 @@ return {
         config = function()
           require('utils.autocmd').augroup('CustomHighlights', function(autocmd)
             autocmd('ColorScheme', '*', function()
+              local c = require('gruvbox-baby.colors').config()
               local hl = vim.api.nvim_set_hl
+
+              hl(0, 'NonText', {fg=c.medium_gray})
 
               hl(0, 'LspReferenceText', {fg='#fbf1c7', bg='#005f87'})
               hl(0, 'LspReferenceRead', {link='LspReferenceText'})
