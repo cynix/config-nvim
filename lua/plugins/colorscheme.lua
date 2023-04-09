@@ -25,6 +25,8 @@ return {
               hl(0, 'IlluminatedWordText', {link='LspReferenceText'})
               hl(0, 'IlluminatedWordRead', {link='LspReferenceText'})
               hl(0, 'IlluminatedWordWrite', {link='LspReferenceText'})
+
+              hl(0, 'TreesitterContext', {bg=brighten(colors.background_light, 0.1)})
             end)
           end)
         end,

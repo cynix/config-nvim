@@ -40,5 +40,14 @@ return {
         enable = true,
       },
     }
-  }
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
+    opts = {
+      patterns = {
+        default = { 'class', 'function', 'method', 'if', 'for', 'while', 'switch', 'case' }
+      },
+    },
+  },
 }
