@@ -79,6 +79,7 @@ return {
       setup = {
         clangd = function(_, opts)
           require('clangd_extensions').setup({server=opts})
+          return true
         end,
       }
     },
