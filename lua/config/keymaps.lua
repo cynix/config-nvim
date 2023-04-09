@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local api = vim.api
 
 -- add blank line above/below
 map('n', '-', "<Cmd>put=''<CR>", {noremap=true})
@@ -14,7 +15,30 @@ map({'n', 'x'}, '?', '?\\v', {noremap=true})
 
 -- window
 map('n', '\\', '<C-w>', {noremap=true})
-map('n', '\\d', ':bd<CR>', {noremap=true})
+
+map('n', '\\w', function()
+  local current = api.nvim_get_current_win()
+  local windows = api.nvim_tabpage_list_wins(0)
+  local n = 0
+
+  for i, w in ipairs(windows) do
+    if w == current then
+      n = i
+      break
+    end
+  end
+
+  for i = 1, #windows do
+    local w = windows[(n + i - 1) % #windows + 1]
+    if w == current then
+      break
+    end
+    if api.nvim_win_get_config(w).relative == '' then
+      api.nvim_set_current_win(w)
+      break
+    end
+  end
+end)
 
 -- folding
 map('n', '=', 'za', {noremap=true})
