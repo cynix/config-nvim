@@ -1,5 +1,15 @@
 return {
   {
+    'cshuaimin/ssr.nvim',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    keys = {
+      { '<Leader>sR', function() require('ssr').open() end, desc='Structured Replace', mode={'n', 'x'} },
+    },
+    opts = {
+      border = 'rounded',
+    },
+  },
+  {
     'echasnovski/mini.trailspace',
     config = function()
       vim.api.nvim_set_hl(0, 'MiniTrailspace', {fg='#870000', bg='#870000'})

@@ -1,5 +1,15 @@
 return {
   {
+    'andymass/vim-matchup',
+    event = {'BufReadPost', 'BufNewFile'},
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    init = function()
+      local g = vim.g
+      g.matchup_matchparen_deferred = 1
+      g.matchup_matchparen_offscreen = {method='popup'}
+    end,
+  },
+  {
     'derekwyatt/vim-fswitch',
     event = 'BufEnter',
     keys = {

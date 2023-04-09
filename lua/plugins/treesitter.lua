@@ -1,15 +1,5 @@
 return {
   {
-    'cshuaimin/ssr.nvim',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    keys = {
-      { '<Leader>sR', function() require('ssr').open() end, desc='Structured Replace', mode={'n', 'x'} },
-    },
-    opts = {
-      border = 'rounded',
-    },
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     opts = {
       ensure_installed = {
@@ -45,6 +35,9 @@ return {
       },
       indent = {
         enable = false,
+      },
+      matchup = {
+        enable = true,
       },
       playground = {
         enable = true,
