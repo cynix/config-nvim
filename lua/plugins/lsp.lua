@@ -13,6 +13,8 @@ return {
     dependencies = {
       {'p00f/clangd_extensions.nvim', config=false},
     },
+    event = function() return {} end, -- disable loading on BufReadPre etc
+    ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
       autoformat = false,
       servers = {
