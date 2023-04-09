@@ -9,10 +9,12 @@ return {
         config = function()
           require('utils.autocmd').augroup('CustomHighlights', function(autocmd)
             autocmd('ColorScheme', '*', function()
-              local c = require('gruvbox-baby.colors').config()
+              local colors = require('gruvbox-baby.colors').config()
+              local brighten = require('gruvbox-baby.util').brighten
               local hl = api.nvim_set_hl
 
-              hl(0, 'NonText', {fg=c.medium_gray})
+              hl(0, 'NonText', {fg=colors.medium_gray})
+              hl(0, 'CursorLineNr', {fg=brighten(colors.comment, 0.5), bg=colors.background_light})
 
               hl(0, 'LspReferenceText', {fg='#fbf1c7', bg='#005f87'})
               hl(0, 'LspReferenceRead', {link='LspReferenceText'})
