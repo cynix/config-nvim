@@ -48,6 +48,15 @@ return {
         end,
       },
     },
+    keys = function(_, keys)
+      for i, k in ipairs(keys) do
+        -- Assigned to ssr.nvim
+        if k[1] == '<leader>sR' or k[1] == '<Leader>sR' then
+          table.remove(keys, i)
+          break
+        end
+      end
+    end,
     opts = {
       defaults = {
         layout_strategy = 'vertical',
