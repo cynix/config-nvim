@@ -5,35 +5,14 @@ return {
     'LazyVim/LazyVim',
     dependencies = {
       {
-        'luisiacc/gruvbox-baby',
-        config = function()
-          require('utils.autocmd').augroup('CustomHighlights', function(autocmd)
-            autocmd('ColorScheme', '*', function()
-              local colors = require('gruvbox-baby.colors').config()
-              local brighten = require('gruvbox-baby.util').brighten
-              local hl = api.nvim_set_hl
-
-              hl(0, 'NonText', {fg=colors.medium_gray})
-              hl(0, 'CursorLineNr', {fg=brighten(colors.comment, 0.5), bg=colors.background_light})
-
-              hl(0, 'LspReferenceText', {fg='#fbf1c7', bg='#005f87'})
-              hl(0, 'LspReferenceRead', {link='LspReferenceText'})
-              hl(0, 'LspReferenceWrite', {link='LspReferenceText'})
-
-              hl(0, 'LspCodeLens', {fg=api.nvim_get_hl_by_name('Comment', true).foreground})
-
-              hl(0, 'IlluminatedWordText', {link='LspReferenceText'})
-              hl(0, 'IlluminatedWordRead', {link='LspReferenceText'})
-              hl(0, 'IlluminatedWordWrite', {link='LspReferenceText'})
-
-              hl(0, 'TreesitterContext', {bg=brighten(colors.background_light, 0.1)})
-            end)
-          end)
-        end,
+        'rebelot/kanagawa.nvim',
+        opts = {
+          dimInactive = true,
+        },
       },
     },
     opts = {
-      colorscheme = 'gruvbox-baby',
+      colorscheme = 'kanagawa',
     },
   },
   {

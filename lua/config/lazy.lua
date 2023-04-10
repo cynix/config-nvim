@@ -13,7 +13,7 @@ require('lazy').setup({
     lazy = false,
     version = false,
   },
-  install = { colorscheme = { 'gruvbox-baby', 'tokyonight' } },
+  install = { colorscheme = { 'kanagawa', 'tokyonight' } },
   checker = { enabled = true },
   performance = {
     rtp = {
