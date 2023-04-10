@@ -11,7 +11,24 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      {'p00f/clangd_extensions.nvim', config=false},
+      {
+        'p00f/clangd_extensions.nvim',
+        config = false,
+      },
+      {
+        'cynix/inlay-hints.nvim',
+        branch = 'dev',
+        opts = {
+          eol = {
+            priority = 1,
+          },
+        },
+        config = function(_, opts)
+          local inlay = require('inlay-hints')
+          inlay.setup(opts)
+          require('lazyvim.util').on_attach(inlay.on_attach)
+        end,
+      },
     },
     event = function() return {} end, -- disable loading on BufReadPre etc
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
@@ -19,13 +36,33 @@ return {
       autoformat = false,
       servers = {
         clangd = {
-          cmd = { 'clangd', '--background-index', '--completion-style=bundled', '--inlay-hints', '--log=error' },
+          cmd = {
+            'clangd',
+            '--background-index',
+            '--completion-style=bundled',
+            '--function-arg-placeholders',
+            '--header-insertion=iwyu',
+            '--header-insertion-decorators',
+            '--inlay-hints',
+            '--log=error',
+          },
           mason = false,
         },
         gopls = {
           cmd = { 'gopls', 'serve' },
-          init_options = {
-            usePlaceholders = true,
+          settings = {
+            gopls = {
+              usePlaceholders = true,
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
           },
         },
         pyright = {
@@ -83,9 +120,7 @@ return {
           require('clangd_extensions').setup({
             server = opts,
             extensions = {
-              inlay_hints = {
-                parameter_hints_prefix = ' <- ',
-              },
+              autoSetHints = false,
             },
           })
           return true
