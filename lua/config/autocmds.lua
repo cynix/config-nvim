@@ -1,8 +1,9 @@
 local augroup = require('utils.autocmd').augroup
-local whichkey = require('which-key').register
 local o = vim.opt_local
 
 augroup('LocalKeys', function(autocmd)
+  local whichkey = require('which-key').register
+
   autocmd('FileType', 'help', function()
     whichkey({
       ['<CR>'] = { '<C-]>', 'Go to keyword', buffer=vim.api.nvim_get_current_buf() },
@@ -64,5 +65,20 @@ augroup('CrossHairs', function(autocmd)
   autocmd('WinLeave', '*', function()
     o.cursorline = false
     o.cursorcolumn = false
+  end)
+end)
+
+augroup('ClearSearchHighlight', function(autocmd)
+  local fn = nil
+
+  autocmd('CmdlineEnter', {'/', '?'}, function() o.hlsearch = true end)
+  autocmd('CmdlineLeave', {'/', '?'}, function()
+    o.hlsearch = false
+
+    if fn == nil then
+      fn = require('highlight_current_n')['/,?']
+    end
+
+    fn()
   end)
 end)
