@@ -41,7 +41,7 @@ map('n', '\\w', function()
 end)
 
 -- folding
-map('n', '=', 'za', {noremap=true})
+map('n', '<Leader>=', 'za', {noremap=true})
 
 -- navigation
 map('n', '<BS>', '<C-o>', {noremap=true})
