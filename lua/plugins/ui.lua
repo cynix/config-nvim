@@ -71,22 +71,6 @@ return {
     },
   },
   {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      current_line_blame = true,
-      current_line_blame_opts = {
-        virt_text_pos = 'eol',
-      },
-      current_line_blame_formatter_opts = {
-        relative_time = true,
-      },
-      signs = {
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-      }
-    },
-  },
-  {
     'nvim-lualine/lualine.nvim',
     opts = {
       sections = {
