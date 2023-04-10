@@ -21,6 +21,16 @@ return {
         opts = {
           eol = {
             priority = 1,
+            parameter = {
+              format = function(hints)
+                return string.format(' <- (%s)', string.gsub(hints, ':%s*$', ''))
+              end,
+            },
+            type = {
+              format = function(hints)
+                return string.format(' => %s', string.gsub(hints, '^%s*:%s*', ''))
+              end,
+            },
           },
         },
         config = function(_, opts)
