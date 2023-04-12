@@ -48,6 +48,19 @@ return {
     end,
   },
   {
+    'kevinhwang91/nvim-hlslens',
+    keys = {
+      { '/' },
+      { '?' },
+      { 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], desc='Search forward', silent=true },
+      { 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], desc='Search backward', silent=true },
+      { '*', [[*<Cmd>lua require('hlslens').start()<CR>]], desc='Search for cursor word', silent=true },
+    },
+    opts = {
+      calm_down = true,
+    },
+  },
+  {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       {
@@ -76,15 +89,6 @@ return {
         lsp_implementations = { fname_width = 100 },
         lsp_references = { fname_width = 100 },
       },
-    },
-  },
-  {
-    'rktjmp/highlight-current-n.nvim',
-    keys = {
-      { '/' },
-      { '?' },
-      { 'n', '<Plug>(highlight-current-n-n)', silent=true },
-      { 'N', '<Plug>(highlight-current-n-N)', silent=true },
     },
   },
 }

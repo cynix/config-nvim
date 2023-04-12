@@ -67,18 +67,3 @@ augroup('CrossHairs', function(autocmd)
     o.cursorcolumn = false
   end)
 end)
-
-augroup('ClearSearchHighlight', function(autocmd)
-  local fn = nil
-
-  autocmd('CmdlineEnter', {'/', '?'}, function() o.hlsearch = true end)
-  autocmd('CmdlineLeave', {'/', '?'}, function()
-    o.hlsearch = false
-
-    if fn == nil then
-      fn = require('highlight_current_n')['/,?']
-    end
-
-    fn()
-  end)
-end)

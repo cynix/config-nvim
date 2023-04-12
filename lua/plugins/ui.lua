@@ -64,6 +64,9 @@ return {
           ['cmp.entry.get_documentation'] = true,
         },
       },
+      messages = {
+        view_search = false,
+      },
       presets = {
         lsp_doc_border = true,
       },

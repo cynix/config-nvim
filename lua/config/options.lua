@@ -24,7 +24,7 @@ o.formatoptions = 'ro/qnlmB1j'
 -- }}}
 
 -- searching/replacing {{{
-o.hlsearch = false
+o.hlsearch = true
 o.ignorecase = true
 o.smartcase = true
 o.gdefault = true
