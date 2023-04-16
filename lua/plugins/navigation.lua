@@ -10,19 +10,6 @@ return {
     end,
   },
   {
-    'derekwyatt/vim-fswitch',
-    event = 'BufEnter',
-    keys = {
-      { '<Leader>o', '<Cmd>FSHere<CR>', desc='Switch to alternate file' },
-    },
-    config = function()
-      require('utils.autocmd').augroup('FSwitch', function(autocmd)
-        autocmd('BufEnter', '*.cc', function() vim.b.fswitchdst = 'h,hh,hpp' end)
-        autocmd('BufEnter', '*.h', function() vim.b.fswitchdst = 'cc,cpp,cxx,c,mm,m' end)
-      end)
-    end,
-  },
-  {
     'ggandor/leap.nvim',
     -- do not override s
     keys = function()
@@ -90,5 +77,29 @@ return {
         lsp_references = { fname_width = 100 },
       },
     },
+  },
+  {
+    'rgroli/other.nvim',
+    keys = {
+      { '<Leader>o', '<Cmd>Other<CR>', desc='Switch to alternate file' },
+    },
+    opts = {
+      mappings = {
+        {
+          pattern = '(.*)/(.*)[.]cc$',
+          target = '%1/%2.h',
+        },
+        {
+          pattern = '(.*)/(.*)[.]h$',
+          target = {'%1/%2.cc', '%1/%2.c', '%1/%2.cpp'},
+        },
+      },
+      style = {
+        border = 'rounded',
+      },
+    },
+    config = function(_, opts)
+      require('other-nvim').setup(opts)
+    end,
   },
 }
