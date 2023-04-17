@@ -51,11 +51,11 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
       {
+        'debugloop/telescope-undo.nvim',
+      },
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
-        config = function()
-          require('telescope').load_extension('fzf')
-        end,
       },
     },
     keys = function(_, keys)
@@ -66,10 +66,23 @@ return {
           break
         end
       end
+
+      keys[#keys+1] = { '<Leader>uu', '<Cmd>Telescope undo<CR>', desc='Undo list' }
     end,
     opts = {
       defaults = {
         layout_strategy = 'vertical',
+      },
+      extensions = {
+        fzf = {},
+        undo = {
+          layout_config = {
+            horizontal = {
+              preview_width = 0.75,
+            },
+          },
+          layout_strategy = 'horizontal',
+        },
       },
       pickers = {
         lsp_definitions = { fname_width = 100 },
@@ -77,6 +90,13 @@ return {
         lsp_references = { fname_width = 100 },
       },
     },
+    config = function(_, opts)
+      require('telescope').setup(opts)
+
+      for k, _ in pairs(opts.extensions or {}) do
+        require('telescope').load_extension(k)
+      end
+    end,
   },
   {
     'rgroli/other.nvim',
