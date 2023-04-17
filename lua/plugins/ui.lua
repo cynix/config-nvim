@@ -46,6 +46,11 @@ return {
         end
         return diagnostics
       end,
+      window = {
+        margin = {
+          vertical = 0,
+        },
+      },
     },
   },
   {

@@ -8,6 +8,14 @@ return {
         'rebelot/kanagawa.nvim',
         opts = {
           dimInactive = true,
+          overrides = function(colors)
+            local ui = colors.theme.ui
+            return {
+              InclineNormal = { bg=ui.bg_p2 },
+              InclineNormalNC = { bg=ui.bg_p1 },
+              WinSeparator = { fg=ui.bg_p2 },
+            }
+          end,
         },
       },
     },
