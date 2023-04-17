@@ -86,6 +86,17 @@ return {
     },
   },
   {
+    'petertriho/nvim-scrollbar',
+    event = 'VeryLazy',
+    opts = {
+      show_in_active_only = true,
+      handlers = {
+        gitsigns = true,
+        search = true,
+      },
+    },
+  },
+  {
     'sitiom/nvim-numbertoggle',
     event = 'VeryLazy',
   },
