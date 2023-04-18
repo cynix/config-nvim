@@ -1,4 +1,55 @@
+local feedkeys = vim.fn.feedkeys
+local replace_termcodes = vim.api.nvim_replace_termcodes
+local luasnip = nil
+
+local function tab_forward()
+  if not luasnip then
+    luasnip = require('luasnip')
+  end
+
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  else
+    feedkeys(replace_termcodes('<Plug>(Tabout)', true, true, true))
+  end
+end
+
+local function tab_backward()
+  if not luasnip then
+    luasnip = require('luasnip')
+  end
+
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  else
+    feedkeys(replace_termcodes('<Plug>(TaboutBack)', true, true, true))
+  end
+end
+
 return {
+  {
+    'abecodes/tabout.nvim',
+    dependencies = {
+      'hrsh7th/nvim-cmp',
+      'L3MON4D3/LuaSnip',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    event = 'InsertEnter',
+    opts = {
+      act_as_tab = true,
+      act_as_shift_tab = true,
+      ignore_beginning = true,
+      tabkey = '',
+      backwards_tabkey = '',
+    },
+    config = function(_, opts)
+      require('tabout').setup(opts)
+
+      local map = vim.keymap.set
+      map('i', '<Tab>', tab_forward)
+      map('i', '<S-Tab>', tab_backward)
+    end,
+  },
   {
     'cshuaimin/ssr.nvim',
     dependencies = 'nvim-treesitter/nvim-treesitter',
