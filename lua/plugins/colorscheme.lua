@@ -13,6 +13,7 @@ return {
             return {
               InclineNormal = { bg=ui.bg_p2 },
               InclineNormalNC = { bg=ui.bg_p1 },
+              LspInlayHint = { link='Comment' },
               WinSeparator = { fg=ui.bg_p2 },
             }
           end,
