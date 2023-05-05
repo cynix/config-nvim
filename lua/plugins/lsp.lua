@@ -1,3 +1,36 @@
+local inlay_hints = vim.fn.has('anticonceal') and {
+  'lvimuser/lsp-inlayhints.nvim',
+  branch = 'anticonceal',
+  config = function(_, opts)
+    local inlay = require('lsp-inlayhints')
+    inlay.setup(opts)
+    require('lazyvim.util').on_attach(inlay.on_attach)
+  end,
+} or {
+  'cynix/inlay-hints.nvim',
+  branch = 'dev',
+  opts = {
+    eol = {
+      priority = 1,
+      parameter = {
+        format = function(hints)
+          return string.format(' <- (%s)', string.gsub(hints, ':%s*$', ''))
+        end,
+      },
+      type = {
+        format = function(hints)
+          return string.format(' => %s', string.gsub(hints, '^%s*:%s*', ''))
+        end,
+      },
+    },
+  },
+  config = function(_, opts)
+    local inlay = require('inlay-hints')
+    inlay.setup(opts)
+    require('lazyvim.util').on_attach(inlay.on_attach)
+  end,
+}
+
 return {
   {
     'folke/trouble.nvim',
@@ -15,30 +48,7 @@ return {
         'p00f/clangd_extensions.nvim',
         config = false,
       },
-      {
-        'cynix/inlay-hints.nvim',
-        branch = 'dev',
-        opts = {
-          eol = {
-            priority = 1,
-            parameter = {
-              format = function(hints)
-                return string.format(' <- (%s)', string.gsub(hints, ':%s*$', ''))
-              end,
-            },
-            type = {
-              format = function(hints)
-                return string.format(' => %s', string.gsub(hints, '^%s*:%s*', ''))
-              end,
-            },
-          },
-        },
-        config = function(_, opts)
-          local inlay = require('inlay-hints')
-          inlay.setup(opts)
-          require('lazyvim.util').on_attach(inlay.on_attach)
-        end,
-      },
+      inlay_hints,
     },
     event = function() return {} end, -- disable loading on BufReadPre etc
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
