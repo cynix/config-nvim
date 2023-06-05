@@ -1,4 +1,4 @@
-local inlay_hints = vim.fn.has('anticonceal') and {
+local inlay_hints = vim.version().prerelease and {
   'lvimuser/lsp-inlayhints.nvim',
   branch = 'anticonceal',
   config = function(_, opts)
@@ -50,7 +50,6 @@ return {
       },
       inlay_hints,
     },
-    event = function() return {} end, -- disable loading on BufReadPre etc
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
       autoformat = false,
@@ -63,7 +62,6 @@ return {
             '--function-arg-placeholders',
             '--header-insertion=iwyu',
             '--header-insertion-decorators',
-            '--inlay-hints',
             '--log=error',
           },
           mason = false,
