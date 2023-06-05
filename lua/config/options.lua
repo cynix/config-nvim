@@ -1,5 +1,7 @@
 local o = vim.opt
 
+o.clipboard = 'unnamed'
+
 -- display {{{
 o.textwidth = 120
 o.colorcolumn = '+1'
