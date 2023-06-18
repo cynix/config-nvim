@@ -1,6 +1,6 @@
 local o = vim.opt
 
-o.clipboard = 'unnamed'
+o.clipboard = ''
 
 -- display {{{
 o.textwidth = 120
