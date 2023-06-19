@@ -1,5 +1,10 @@
 local register = require('which-key').register
 local api = vim.api
+local del = vim.keymap.del
+
+-- remove unwanted LazyVim keymaps
+del({'n', 'i', 'v'}, '<A-j>')
+del({'n', 'i', 'v'}, '<A-k>')
 
 -- add blank line above/below
 register({
