@@ -90,8 +90,10 @@ return {
     opts = function(_, opts)
       local cmp = require('cmp')
 
-      opts.mapping['<Up>'] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert})
       opts.mapping['<Down>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert})
+      opts.mapping['<C-j>' ] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert})
+      opts.mapping['<Up>'  ] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert})
+      opts.mapping['<C-k>' ] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert})
 
       opts.window = {
         completion = cmp.config.window.bordered(),
