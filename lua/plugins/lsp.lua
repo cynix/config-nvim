@@ -1,12 +1,4 @@
-local inlay_hints = vim.version().prerelease and {
-  'lvimuser/lsp-inlayhints.nvim',
-  branch = 'anticonceal',
-  config = function(_, opts)
-    local inlay = require('lsp-inlayhints')
-    inlay.setup(opts)
-    require('lazyvim.util').on_attach(inlay.on_attach)
-  end,
-} or {
+local inlay_hints = vim.version().prerelease and {} or {
   'cynix/inlay-hints.nvim',
   branch = 'dev',
   opts = {
@@ -53,6 +45,7 @@ return {
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
       autoformat = false,
+      inlay_hints = { enabled = true },
       servers = {
         clangd = {
           cmd = {
@@ -152,6 +145,11 @@ return {
       keys[#keys+1] = {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'}
       keys[#keys+1] = {'<C-n>', '<Cmd>Telescope lsp_implementations<CR>', desc='Goto Implementations'}
       keys[#keys+1] = {'<F2>', vim.lsp.buf.rename, desc='Rename', has='rename'}
+
+      local inlay_hint = vim.lsp.buf.inlay_hint
+      require('lazyvim.util').on_attach(function(_, buf)
+        inlay_hint(buf, true)
+      end)
     end,
   },
 }
