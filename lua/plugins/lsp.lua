@@ -56,6 +56,7 @@ return {
             '--header-insertion=iwyu',
             '--header-insertion-decorators',
             '--log=error',
+            '--offset-encoding=utf-16',
           },
           mason = false,
         },
