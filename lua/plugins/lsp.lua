@@ -146,11 +146,6 @@ return {
       keys[#keys+1] = {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'}
       keys[#keys+1] = {'<C-n>', '<Cmd>Telescope lsp_implementations<CR>', desc='Goto Implementations'}
       keys[#keys+1] = {'<F2>', vim.lsp.buf.rename, desc='Rename', has='rename'}
-
-      local inlay_hint = vim.lsp.buf.inlay_hint
-      require('lazyvim.util').on_attach(function(_, buf)
-        inlay_hint(buf, true)
-      end)
     end,
   },
 }
