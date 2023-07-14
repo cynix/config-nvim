@@ -19,7 +19,8 @@ return {
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     keys = {
-      { '<Leader>gd', '<Cmd>DiffviewOpen<CR>', desc='DiffView' },
+      { '<Leader>gd', '<Cmd>DiffviewOpen<CR>', desc='DiffViewOpen' },
+      { '<Leader>gD', '<Cmd>DiffviewClose<CR>', desc='DiffViewClose' },
       { ']x', desc='Next conflict' },
       { '[x', desc='Previous conflict' },
       { '<Leader>co', desc='Choose Ours' },
