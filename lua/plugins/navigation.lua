@@ -18,29 +18,21 @@ return {
     },
   },
   {
-    'ggandor/leap.nvim',
+    'folke/flash.nvim',
     -- do not override s
     keys = function()
       return {
-        { 'S', mode={'n', 'x', 'o'}, desc='Leap forward to' },
-        { 'X', mode={'n', 'x', 'o'}, desc='Leap backward to' },
-        { 'gs', mode={'n', 'x', 'o'}, desc='Leap from window' },
+        { 'S', mode={'n', 'x', 'o'}, function() require('flash').jump() end, desc='Flash' },
+        { 'r', mode={'o'}, function() require('flash').remote() end, desc='Remote Flash' },
       }
     end,
     opts = {
-      safe_labels = {'f', 'n', 'u', 't', '/', 'S', 'F', 'N', 'L', 'H', 'M', 'U', 'G', 'T', '?', 'Z'},
+      modes = {
+        char = {
+          jump_labels = true,
+        },
+      },
     },
-    config = function(_, opts)
-      local leap = require('leap')
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-
-      local map = vim.keymap.set
-      map({'n', 'x', 'o'}, 'S', '<Plug>(leap-forward-to)', {silent=true, desc='Leap forward to'})
-      map({'n', 'x', 'o'}, 'X', '<Plug>(leap-backward-to)', {silent=true, desc='Leap backward to'})
-      map({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-windows)', {silent=true, desc='Leap from window'})
-    end,
   },
   {
     'kevinhwang91/nvim-hlslens',
