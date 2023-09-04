@@ -36,10 +36,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      {
-        'p00f/clangd_extensions.nvim',
-        config = false,
-      },
+      'p00f/clangd_extensions.nvim',
       inlay_hints,
     },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
@@ -48,17 +45,29 @@ return {
       inlay_hints = { enabled = true },
       servers = {
         clangd = {
+          capabilities = {
+            offsetEncoding = {'utf-16'},
+          },
           cmd = {
             'clangd',
             '--background-index',
-            '--completion-style=bundled',
+            '--clang-tidy',
+            '--completion-style=detailed',
             '--function-arg-placeholders',
             '--header-insertion=iwyu',
             '--header-insertion-decorators',
             '--log=error',
-            '--offset-encoding=utf-16',
+          },
+          init_options = {
+            completeUnimported = true,
+            clangdFileStatus = true,
+            usePLaceholders = true,
           },
           mason = false,
+          root_dir = function(fname)
+            local u = require('lspconfig.util')
+            return u.root_pattern('compile_commands.json')(fname) or u.find_git_ancestor(fname)
+          end,
         },
         gopls = {
           cmd = { 'gopls', 'serve' },
@@ -127,17 +136,6 @@ return {
           end,
         },
       },
-      setup = {
-        clangd = function(_, opts)
-          require('clangd_extensions').setup({
-            server = opts,
-            extensions = {
-              autoSetHints = false,
-            },
-          })
-          return true
-        end,
-      }
     },
     init = function()
       local keys = require('lazyvim.plugins.lsp.keymaps').get()
