@@ -71,6 +71,7 @@ return {
   },
   {
     'echasnovski/mini.trailspace',
+    event = 'VeryLazy',
     config = function()
       vim.api.nvim_set_hl(0, 'MiniTrailspace', {fg='#870000', bg='#870000'})
       require('mini.trailspace').setup()
