@@ -61,6 +61,15 @@ return {
     },
   },
   {
+    'echasnovski/mini.comment',
+    opts = {
+      mappings = {
+        comment = '//',
+        comment_line = '//',
+      },
+    },
+  },
+  {
     'echasnovski/mini.trailspace',
     config = function()
       vim.api.nvim_set_hl(0, 'MiniTrailspace', {fg='#870000', bg='#870000'})
