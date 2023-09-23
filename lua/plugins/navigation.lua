@@ -4,9 +4,7 @@ return {
     event = {'BufReadPost', 'BufNewFile'},
     dependencies = 'nvim-treesitter/nvim-treesitter',
     init = function()
-      local g = vim.g
-      g.matchup_matchparen_deferred = 1
-      g.matchup_matchparen_offscreen = {method='popup'}
+      vim.g.matchup_matchparen_deferred = 1
     end,
   },
   {
