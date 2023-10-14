@@ -85,6 +85,9 @@ return {
             },
           },
         },
+        neocmake = {
+          mason = false,
+        },
         pyright = {
           before_init = function(_, config)
             local fn = vim.fn
