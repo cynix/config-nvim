@@ -42,7 +42,33 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'p00f/clangd_extensions.nvim',
+      {
+        'p00f/clangd_extensions.nvim',
+        config = function() end,
+        opts = {
+          ast = {
+            --These require codicons (https://github.com/microsoft/vscode-codicons)
+            role_icons = {
+              type = "",
+              declaration = "",
+              expression = "",
+              specifier = "",
+              statement = "",
+              ["template argument"] = "",
+            },
+            kind_icons = {
+              Compound = "",
+              Recovery = "",
+              TranslationUnit = "",
+              PackExpansion = "",
+              TemplateTypeParm = "",
+              TemplateTemplateParm = "",
+              TemplateParamObject = "",
+            },
+          },
+          inlay_hints = { inline = false },
+        },
+      },
       inlay_hints,
     },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
@@ -143,6 +169,13 @@ return {
             config.settings.python.pythonPath = p
           end,
         },
+      },
+      setup = {
+        clangd = function(_, opts)
+          local o = require('lazyvim.util').opts('clangd_extensions.nvim')
+          require('clangd_extensions').setup(vim.tbl_deep_extend('force', o or {}, { server = opts }))
+          return false
+        end,
       },
     },
     init = function()
