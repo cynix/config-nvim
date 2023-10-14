@@ -78,24 +78,6 @@ return {
     end,
   },
   {
-    'gbprod/yanky.nvim',
-    dependencies = {
-      'kkharji/sqlite.lua',
-    },
-    keys = {
-      { 'y', '<Plug>(YankyYank)', desc='Yanky yank', mode={'n', 'x'} },
-      { 'p', '<Plug>(YankyPutAfter)', desc='Yanky put after', mode={'n', 'x'} },
-      { 'P', '<Plug>(YankyPutBefore)', desc='Yanky put before', mode={'n', 'x'} },
-      { '<A-n>', '<Plug>(YankyCycleForward)', desc='Yanky cycle forward', mode={'n', 'x'} },
-      { '<A-p>', '<Plug>(YankyCycleBackward)', desc='Yanky cycle backward', mode={'n', 'x'} },
-    },
-    opts = {
-      ring = {
-        storage = 'sqlite',
-      },
-    },
-  },
-  {
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       local cmp = require('cmp')
