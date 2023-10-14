@@ -1,4 +1,7 @@
+local g = vim.g
 local o = vim.opt
+
+g.autoformat = false
 
 o.clipboard = ''
 

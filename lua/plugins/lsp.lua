@@ -19,7 +19,7 @@ local inlay_hints = vim.version().prerelease and {} or {
   config = function(_, opts)
     local inlay = require('inlay-hints')
     inlay.setup(opts)
-    require('lazyvim.util').on_attach(inlay.on_attach)
+    require('lazyvim.util.lsp').on_attach(inlay.on_attach)
   end,
 }
 
@@ -41,7 +41,6 @@ return {
     },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
-      autoformat = false,
       inlay_hints = { enabled = true },
       servers = {
         clangd = {
@@ -90,7 +89,7 @@ return {
           before_init = function(_, config)
             local fn = vim.fn
             local executable = fn.executable
-            local path = require('lspconfig/util').path
+            local path = require('lspconfig.util').path
 
             local find_cmd = function(cmd, prefixes, start)
               if type(prefixes) == 'string' then
