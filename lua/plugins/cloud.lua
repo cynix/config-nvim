@@ -8,7 +8,7 @@ return {
       languages = {
         cpp = {
           compiler = 'clang1301',
-          options = { '-std=c++17' },
+          options = { '-std=c++20' },
         },
       },
       quickfix = {
