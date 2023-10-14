@@ -81,23 +81,13 @@ return {
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       local cmp = require('cmp')
-      local compare = require('cmp.config.compare')
+      local mapping = cmp.mapping
+      local Insert = cmp.SelectBehavior.Insert
 
-      opts.mapping['<Down>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert})
-      opts.mapping['<C-j>' ] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert})
-      opts.mapping['<Up>'  ] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert})
-      opts.mapping['<C-k>' ] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert})
-
-      opts.sorting.comparators = {
-        compare.offset,
-        compare.exact,
-        require('clangd_extensions.cmp_scores'),
-        compare.recently_used,
-        compare.locality,
-        compare.kind,
-        compare.length,
-        compare.order,
-      }
+      opts.mapping['<Down>'] = mapping.select_next_item({behavior=Insert})
+      opts.mapping['<C-j>' ] = mapping.select_next_item({behavior=Insert})
+      opts.mapping['<Up>'  ] = mapping.select_prev_item({behavior=Insert})
+      opts.mapping['<C-k>' ] = mapping.select_prev_item({behavior=Insert})
 
       opts.window = {
         completion = cmp.config.window.bordered(),
