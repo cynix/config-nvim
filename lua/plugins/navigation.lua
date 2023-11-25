@@ -53,7 +53,8 @@ return {
       },
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        enabled = function() return vim.fn.executable('cmake') == 1 end,
       },
     },
     keys = function(_, keys)
@@ -72,7 +73,6 @@ return {
         layout_strategy = 'vertical',
       },
       extensions = {
-        fzf = {},
         undo = {
           layout_config = {
             horizontal = {
@@ -89,10 +89,11 @@ return {
       },
     },
     config = function(_, opts)
-      require('telescope').setup(opts)
+      local t = require('telescope')
+      t.setup(opts)
 
-      for k, _ in pairs(opts.extensions or {}) do
-        require('telescope').load_extension(k)
+      for k, _ in pairs(opts.extensions) do
+        t.load_extension(k)
       end
     end,
   },
