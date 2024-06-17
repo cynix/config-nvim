@@ -27,7 +27,7 @@ return {
   {
     'folke/trouble.nvim',
     keys = {
-      {'<F1>', '<Cmd>TroubleToggle workspace_diagnostics<CR>', desc='Workspace Diagnostics'},
+      {'<F1>', '<Cmd>Trouble diagnostics toggle<CR>', desc='Diagnostics'},
     },
     opts = {
       auto_close = true,
