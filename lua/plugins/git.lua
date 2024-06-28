@@ -6,9 +6,6 @@ return {
       current_line_blame_opts = {
         virt_text_pos = 'eol',
       },
-      current_line_blame_formatter_opts = {
-        relative_time = true,
-      },
       signs = {
         delete = { text = '_' },
         topdelete = { text = '‾' },
