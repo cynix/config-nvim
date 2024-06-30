@@ -1,5 +1,13 @@
 return {
   {
+    'dgagn/diagflow.nvim',
+    event = 'LspAttach',
+    opts = {
+      padding_right = 2,
+      padding_top = 1,
+    },
+  },
+  {
     'folke/trouble.nvim',
     keys = {
       {'<F1>', '<Cmd>Trouble diagnostics toggle<CR>', desc='Diagnostics'},
