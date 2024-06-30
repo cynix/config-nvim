@@ -45,9 +45,19 @@ return {
     }
   },
   {
-    'nvim-treesitter/nvim-treesitter-context',
+    'andersevenrud/nvim_context_vt',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = 'VeryLazy',
     opts = {
+      min_rows = 10,
+    },
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'VeryLazy',
+    opts = {
+      max_lines = 1,
       patterns = {
         default = { 'class', 'function', 'method', 'if', 'for', 'while', 'switch', 'case' }
       },
