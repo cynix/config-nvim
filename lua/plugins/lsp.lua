@@ -1,28 +1,3 @@
-local inlay_hints = vim.version().prerelease and {} or {
-  'cynix/inlay-hints.nvim',
-  branch = 'dev',
-  opts = {
-    eol = {
-      priority = 1,
-      parameter = {
-        format = function(hints)
-          return string.format(' <- (%s)', string.gsub(hints, ':%s*$', ''))
-        end,
-      },
-      type = {
-        format = function(hints)
-          return string.format(' => %s', string.gsub(hints, '^%s*:%s*', ''))
-        end,
-      },
-    },
-  },
-  config = function(_, opts)
-    local inlay = require('inlay-hints')
-    inlay.setup(opts)
-    require('lazyvim.util.lsp').on_attach(inlay.on_attach)
-  end,
-}
-
 return {
   {
     'folke/trouble.nvim',
@@ -69,7 +44,6 @@ return {
           inlay_hints = { inline = false },
         },
       },
-      inlay_hints,
     },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
