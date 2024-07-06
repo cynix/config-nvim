@@ -49,13 +49,11 @@ return {
               TemplateParamObject = "",
             },
           },
-          inlay_hints = { inline = false },
         },
       },
     },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
     opts = {
-      inlay_hints = { enabled = true },
       servers = {
         clangd = {
           capabilities = {
@@ -167,6 +165,14 @@ return {
       keys[#keys+1] = {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'}
       keys[#keys+1] = {'<C-n>', '<Cmd>Telescope lsp_implementations<CR>', desc='Goto Implementations'}
       keys[#keys+1] = {'<F2>', vim.lsp.buf.rename, desc='Rename', has='rename'}
+
+      require('lazyvim.util').lsp.on_attach(function(_, buf)
+        require('utils.autocmd').augroup('no_inlay_hints_in_visual_block', function(autocmd)
+          local toggle = LazyVim.toggle.inlay_hints
+          autocmd('ModeChanged', '*:\x16', function() toggle(buf, false) end)
+          autocmd('ModeChanged', '\x16:*', function() toggle(buf, true) end)
+        end)
+      end)
     end,
   },
 }
