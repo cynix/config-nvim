@@ -1,4 +1,4 @@
-local register = require('which-key').register
+local add = require('which-key').add
 local api = vim.api
 local del = vim.keymap.del
 
@@ -7,31 +7,27 @@ del({'n', 'i', 'v'}, '<A-j>')
 del({'n', 'i', 'v'}, '<A-k>')
 
 -- add blank line above/below
-register({
-  ['-'] = { "<Cmd>put=''<CR>", 'Empty line below' },
-  ['+'] = { "<Cmd>put!=''<CR>", 'Empty line above' },
+add({
+  {'-', "<Cmd>put=''<CR>", desc='Empty line below'},
+  {'+', "<Cmd>put!=''<CR>", desc='Empty line above'},
 })
 
 -- visual indent/unindent
-register({
-  ['<Tab>'] = { '>gv', 'Indent' },
-  ['<S-Tab>'] = { '<gv', 'Undent' },
-}, {
-  mode = 'x',
+add({
+  {'<Tab>', '>gv', desc='Indent', mode='x'},
+  {'<S-Tab>', '<gv', desc='Undent', mode='x'},
 })
 
 -- use regex search by default
-register({
-  ['/'] = { '/\\v', 'Search forward' },
-  ['?'] = { '?\\v', 'Search backward' },
-}, {
-  mode = {'n', 'x'},
+add({
+  {'/', '/\\v', desc='Search forward', mode={'n', 'x'}},
+  {'?', '?\\v', desc='Search backward', mode={'n', 'x'}},
 })
 
 -- window
-register({
-  ['\\'] = { '<C-w>', 'Window commands' },
-  ['\\w'] = {
+add({
+  {'\\', '<C-w>', desc='Window commands'},
+  {'\\w',
     function()
       local current = api.nvim_get_current_win()
       local windows = api.nvim_tabpage_list_wins(0)
@@ -55,16 +51,16 @@ register({
         end
       end
     end,
-    'Cycle windows',
-  }
+    desc='Cycle windows',
+  },
 })
 
 -- folding
-register({
-  ['<Leader>='] = { 'za', 'Toggle fold' },
+add({
+  {'<Leader>=', 'za', desc='Toggle fold'},
 })
 
 -- navigation
-register({
-  ['<BS>'] = { '<C-o>', 'Go to previous jump position' },
+add({
+  {'<BS>', '<C-o>', desc='Go to previous jump position'},
 })
