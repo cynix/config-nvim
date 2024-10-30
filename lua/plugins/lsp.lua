@@ -18,6 +18,7 @@ return {
   },
   {
     'hrsh7th/nvim-cmp',
+    dependencies = { 'p00f/clangd_extensions.nvim' },
     opts = function(_, opts)
       table.insert(opts.sorting.comparators, 1, require('clangd_extensions.cmp_scores'))
     end,
