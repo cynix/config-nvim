@@ -52,7 +52,7 @@ return {
         },
       },
     },
-    ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python'},
+    ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python', 'rust'},
     opts = {
       servers = {
         clangd = {
@@ -149,6 +149,7 @@ return {
             config.settings.python.pythonPath = p
           end,
         },
+        rust_analyzer = {},
       },
       setup = {
         clangd = function(_, opts)
