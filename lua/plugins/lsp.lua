@@ -76,10 +76,6 @@ return {
             usePLaceholders = true,
           },
           mason = false,
-          root_dir = function(fname)
-            local u = require('lspconfig.util')
-            return u.root_pattern('compile_commands.json')(fname) or u.find_git_ancestor(fname)
-          end,
         },
         gopls = {
           cmd = { 'gopls', 'serve' },
@@ -144,7 +140,7 @@ return {
             if vim.env.VIRTUAL_ENV or vim.env.VENV then
               p = (vim.env.VIRTUAL_ENV or vim.env.VENV) .. '/bin/python'
             else
-              p = find_cmd('python', {'.venv/bin', '.buildenv/bin', '.ve/bin'}, config.root_dir)
+              p = find_cmd('python', {'.venv/bin', '.buildenv/bin', '.ve/bin'}, vim.fn.expand('%:h'))
             end
 
             config.settings.python.pythonPath = p
