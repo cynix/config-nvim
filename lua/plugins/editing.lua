@@ -1,31 +1,3 @@
-local feedkeys = vim.fn.feedkeys
-local replace_termcodes = vim.api.nvim_replace_termcodes
-local luasnip = nil
-
-local function tab_forward()
-  if not luasnip then
-    luasnip = require('luasnip')
-  end
-
-  if luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
-  else
-    feedkeys(replace_termcodes('<Plug>(Tabout)', true, true, true))
-  end
-end
-
-local function tab_backward()
-  if not luasnip then
-    luasnip = require('luasnip')
-  end
-
-  if luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    feedkeys(replace_termcodes('<Plug>(TaboutBack)', true, true, true))
-  end
-end
-
 return {
   {
     'abecodes/tabout.nvim',
@@ -34,21 +6,15 @@ return {
       'L3MON4D3/LuaSnip',
       'nvim-treesitter/nvim-treesitter',
     },
-    event = 'InsertEnter',
+    event = 'InsertCharPre',
+    opt = true,
     opts = {
       act_as_tab = true,
       act_as_shift_tab = true,
+      completion = true,
       ignore_beginning = true,
-      tabkey = '',
-      backwards_tabkey = '',
     },
-    config = function(_, opts)
-      require('tabout').setup(opts)
-
-      local map = vim.keymap.set
-      map('i', '<Tab>', tab_forward)
-      map('i', '<S-Tab>', tab_backward)
-    end,
+    priority = 1000,
   },
   {
     'cshuaimin/ssr.nvim',
@@ -84,10 +50,32 @@ return {
       local mapping = cmp.mapping
       local Insert = cmp.SelectBehavior.Insert
 
+      local luasnip = require('luasnip')
+
       opts.mapping['<Down>'] = mapping.select_next_item({behavior=Insert})
       opts.mapping['<C-j>' ] = mapping.select_next_item({behavior=Insert})
       opts.mapping['<Up>'  ] = mapping.select_prev_item({behavior=Insert})
       opts.mapping['<C-k>' ] = mapping.select_prev_item({behavior=Insert})
+
+      opts.mapping['<Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.confirm({behavior=Insert, select=true})
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end
+
+      opts.mapping['<S-Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item({behavior=Insert})
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end
 
       opts.window = {
         completion = cmp.config.window.bordered(),
