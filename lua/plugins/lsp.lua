@@ -160,8 +160,8 @@ return {
       require('lazyvim.util').lsp.on_attach(function(_, buf)
         require('utils.autocmd').augroup('no_inlay_hints_in_visual_block', function(autocmd)
           local toggle = Snacks.toggle.inlay_hints()
-          autocmd('ModeChanged', '*:\x16', function() toggle:set(false) end)
-          autocmd('ModeChanged', '\x16:*', function() toggle:set(true) end)
+          autocmd('ModeChanged', '*:[\x16]', function() toggle:set(false) end)
+          autocmd('ModeChanged', '[i\x16]:[^i]', function() toggle:set(true) end)
         end)
       end)
     end,
