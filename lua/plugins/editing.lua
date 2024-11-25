@@ -2,8 +2,6 @@ return {
   {
     'abecodes/tabout.nvim',
     dependencies = {
-      'hrsh7th/nvim-cmp',
-      'L3MON4D3/LuaSnip',
       'nvim-treesitter/nvim-treesitter',
     },
     event = 'InsertCharPre',
@@ -18,7 +16,9 @@ return {
   },
   {
     'cshuaimin/ssr.nvim',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
     keys = {
       { '<Leader>sR', function() require('ssr').open() end, desc='Structured Replace', mode={'n', 'x'} },
     },
@@ -44,46 +44,6 @@ return {
     end,
   },
   {
-    'hrsh7th/nvim-cmp',
-    opts = function(_, opts)
-      local cmp = require('cmp')
-      local mapping = cmp.mapping
-      local Insert = cmp.SelectBehavior.Insert
-
-      local luasnip = require('luasnip')
-
-      opts.mapping['<Down>'] = mapping.select_next_item({behavior=Insert})
-      opts.mapping['<C-j>' ] = mapping.select_next_item({behavior=Insert})
-      opts.mapping['<Up>'  ] = mapping.select_prev_item({behavior=Insert})
-      opts.mapping['<C-k>' ] = mapping.select_prev_item({behavior=Insert})
-
-      opts.mapping['<Tab>'] = function(fallback)
-        if cmp.visible() then
-          cmp.confirm({behavior=Insert, select=true})
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end
-
-      opts.mapping['<S-Tab>'] = function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item({behavior=Insert})
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end
-
-      opts.window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      }
-    end,
-  },
-  {
     'kylechui/nvim-surround',
     keys = {
       { 'ys', desc='Add surround' },
@@ -97,5 +57,27 @@ return {
     config = function()
       require('nvim-surround').setup()
     end,
+  },
+  {
+    'saghen/blink.cmp',
+    opts = {
+      trigger = {
+        signature_help = {
+          enabled = true,
+        },
+      },
+      windows = {
+        autocomplete = {
+          border = 'rounded',
+          winblend = 0,
+        },
+        documentation = {
+          border = 'rounded',
+        },
+        signature_help = {
+          border = 'rounded',
+        },
+      },
+    },
   },
 }

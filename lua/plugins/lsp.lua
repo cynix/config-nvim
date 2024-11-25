@@ -17,13 +17,6 @@ return {
     },
   },
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = { 'p00f/clangd_extensions.nvim' },
-    opts = function(_, opts)
-      table.insert(opts.sorting.comparators, 1, require('clangd_extensions.cmp_scores'))
-    end,
-  },
-  {
     'neovim/nvim-lspconfig',
     dependencies = {
       {
@@ -73,7 +66,7 @@ return {
           init_options = {
             clangdFileStatus = true,
             completeUnimported = true,
-            usePLaceholders = true,
+            usePlaceholders = true,
           },
           mason = false,
         },

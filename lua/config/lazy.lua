@@ -4,10 +4,14 @@ if not vim.loop.fs_stat(lazy) then
 end
 vim.opt.rtp:prepend(lazy)
 
+vim.g.ai_cmp = true
+vim.g.lazyvim_blink_main = true
+
 require('lazy').setup({
   spec = {
     { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
     { import = 'lazyvim.plugins.extras.ai.copilot' },
+    { import = 'lazyvim.plugins.extras.coding.blink' },
     { import = 'lazyvim.plugins.extras.coding.yanky' },
     { import = 'lazyvim.plugins.extras.editor.aerial' },
     { import = 'lazyvim.plugins.extras.lang.cmake' },
