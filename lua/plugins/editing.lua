@@ -61,20 +61,23 @@ return {
   {
     'saghen/blink.cmp',
     opts = {
-      trigger = {
-        signature_help = {
+      completion = {
+        documentation = {
+          window = {
+            border = 'rounded',
+          },
+        },
+        ghost_text = {
           enabled = true,
         },
-      },
-      windows = {
-        autocomplete = {
+        menu = {
           border = 'rounded',
           winblend = 0,
         },
-        documentation = {
-          border = 'rounded',
-        },
-        signature_help = {
+      },
+      signature = {
+        enabled = true,
+        window = {
           border = 'rounded',
         },
       },

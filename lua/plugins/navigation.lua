@@ -46,58 +46,6 @@ return {
     },
   },
   {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      {
-        'debugloop/telescope-undo.nvim',
-      },
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-        enabled = function() return vim.fn.executable('cmake') == 1 end,
-      },
-    },
-    keys = function(_, keys)
-      for i, k in ipairs(keys) do
-        -- Assigned to ssr.nvim
-        if k[1] == '<leader>sR' or k[1] == '<Leader>sR' then
-          table.remove(keys, i)
-          break
-        end
-      end
-
-      keys[#keys+1] = { '<Leader>uu', '<Cmd>Telescope undo<CR>', desc='Undo list' }
-    end,
-    opts = {
-      defaults = {
-        layout_strategy = 'vertical',
-      },
-      extensions = {
-        undo = {
-          layout_config = {
-            horizontal = {
-              preview_width = 0.75,
-            },
-          },
-          layout_strategy = 'horizontal',
-        },
-      },
-      pickers = {
-        lsp_definitions = { fname_width = 100 },
-        lsp_implementations = { fname_width = 100 },
-        lsp_references = { fname_width = 100 },
-      },
-    },
-    config = function(_, opts)
-      local t = require('telescope')
-      t.setup(opts)
-
-      for k, _ in pairs(opts.extensions) do
-        t.load_extension(k)
-      end
-    end,
-  },
-  {
     'rgroli/other.nvim',
     keys = {
       { '<Leader>o', '<Cmd>Other<CR>', desc='Switch to alternate file' },
