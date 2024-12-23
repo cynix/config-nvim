@@ -38,3 +38,5 @@ o.gdefault = true
 -- completion {{{
 o.wildignore = {'.git', '*.pyc', '*.gz', '*.bz2', '*.lz4', '*.pcap', '*.bin'}
 -- }}}
+
+pcall(require, 'config.local.options')

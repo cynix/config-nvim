@@ -4,9 +4,6 @@ if not vim.loop.fs_stat(lazy) then
 end
 vim.opt.rtp:prepend(lazy)
 
-vim.g.ai_cmp = true
-vim.g.lazyvim_blink_main = true
-
 require('lazy').setup({
   spec = {
     { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
