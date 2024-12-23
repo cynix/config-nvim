@@ -151,6 +151,7 @@ return {
     },
     init = function()
       local keys = require('lazyvim.plugins.lsp.keymaps').get()
+      keys[#keys+1] = {'<C-h>', vim.lsp.buf.hover, desc='Hover'}
       keys[#keys+1] = {'<C-j>', '<Cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<CR>', desc='Definitions'}
       keys[#keys+1] = {'<C-k>', '<Cmd>FzfLua lsp_references<CR>', desc='References'}
       keys[#keys+1] = {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'}
