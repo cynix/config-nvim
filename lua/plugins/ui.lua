@@ -26,6 +26,9 @@ return {
     'b0o/incline.nvim',
     event = 'VeryLazy',
     opts = {
+      hide = {
+        cursorline = true,
+      },
       render = function(props)
         local filename = vim.fn.fnamemodify(api.nvim_buf_get_name(props.buf), ':t')
         local diagnostics = get_diagnostic_label(props)
@@ -54,14 +57,6 @@ return {
     },
   },
   {
-    'echasnovski/mini.indentscope',
-    opts = function(_, opts)
-      opts.draw = vim.tbl_deep_extend('force', opts or {}, {
-        animation = require('mini.indentscope').gen_animation.none(),
-      })
-    end,
-  },
-  {
     'folke/noice.nvim',
     opts = {
       lsp = {
@@ -74,6 +69,14 @@ return {
       },
       presets = {
         lsp_doc_border = true,
+      },
+    },
+  },
+  {
+    'folke/snacks.nvim',
+    opts = {
+      dashboard = {
+        enabled = false,
       },
     },
   },
