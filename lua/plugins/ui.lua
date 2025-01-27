@@ -57,6 +57,11 @@ return {
     },
   },
   {
+    'brenoprata10/nvim-highlight-colors',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
     'folke/noice.nvim',
     opts = {
       lsp = {
