@@ -10,6 +10,7 @@ require('lazy').setup({
     { import = 'lazyvim.plugins.extras.ai.copilot' },
     { import = 'lazyvim.plugins.extras.coding.yanky' },
     { import = 'lazyvim.plugins.extras.editor.aerial' },
+    { import = 'lazyvim.plugins.extras.editor.fzf' },
     { import = 'lazyvim.plugins.extras.lang.cmake' },
     { import = 'plugins' },
   },
