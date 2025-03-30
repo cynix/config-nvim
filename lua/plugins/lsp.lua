@@ -94,7 +94,7 @@ return {
           before_init = function(_, config)
             local fn = vim.fn
             local executable = fn.executable
-            local path = require('lspconfig.util').path
+            local util = require('lspconfig.util')
 
             local find_cmd = function(cmd, prefixes, start)
               if type(prefixes) == 'string' then
@@ -103,18 +103,18 @@ return {
 
               local found = nil
               for _, prefix in ipairs(prefixes) do
-                local full_cmd = prefix and path.join(prefix, cmd) or cmd
+                local full_cmd = prefix and table.concat({prefix, cmd}, '/') or cmd
 
-                if start and path.is_dir(start) then
-                  local abs = path.join(start, full_cmd)
+                if start and fn.isdirectory(start) == 1 then
+                  local abs = table.concat({start, full_cmd}, '/')
                   if executable(abs) > 0 then
                     found = abs
                     break
                   end
                 end
 
-                path.traverse_parents(start, function(dir)
-                  local abs = path.join(dir, full_cmd)
+                util.search_ancestors(start, function(dir)
+                  local abs = table.concat({dir, full_cmd}, '/')
                   if executable(abs) > 0 then
                     found = abs
                     return true
