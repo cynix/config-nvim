@@ -59,5 +59,8 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
     },
+    init = function()
+      require('plugins.ai.notification').init()
+    end,
   },
 }
