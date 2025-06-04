@@ -33,7 +33,17 @@ return {
         },
       },
       strategies = {
+        chat = {
+          adapter = {
+            name = 'copilot',
+            model = 'claude-3.7-sonnet-thought',
+          },
+        },
         inline = {
+          adapter = {
+            name = 'copilot',
+            model = 'claude-3.7-sonnet-thought',
+          },
           keymaps = {
             accept_change = {
               modes = { n = 'y' },
