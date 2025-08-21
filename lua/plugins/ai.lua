@@ -24,7 +24,7 @@ return {
     keys = {
       { '<Leader>a', '<cmd>CodeCompanionChat Toggle<CR>', desc='CodeCompanion Chat', mode={'n'} },
       { '<Leader>a', '<cmd>CodeCompanionChat Add<CR>', desc='CodeCompanion Chat', mode={'v'} },
-      { '<Leader>i', ':CodeCompanion #buffer ', desc='CodeCompanion Inline', mode={'v'} },
+      { '<Leader>i', ':CodeCompanion #{buffer} #{lsp} ', desc='CodeCompanion Inline', mode={'v'} },
     },
     opts = {
       adapters = {
@@ -36,13 +36,13 @@ return {
         chat = {
           adapter = {
             name = 'copilot',
-            model = 'claude-3.7-sonnet-thought',
+            model = 'claude-sonnet-4',
           },
         },
         inline = {
           adapter = {
             name = 'copilot',
-            model = 'claude-3.7-sonnet-thought',
+            model = 'claude-sonnet-4',
           },
           keymaps = {
             accept_change = {
