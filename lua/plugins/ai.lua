@@ -1,6 +1,6 @@
 return {
   {
-    'echasnovski/mini.diff',
+    'nvim-mini/mini.diff',
     config = function()
       local diff = require('mini.diff')
       diff.setup({
@@ -36,13 +36,13 @@ return {
         chat = {
           adapter = {
             name = 'copilot',
-            model = 'claude-sonnet-4',
+            model = 'claude-sonnet-4.5',
           },
         },
         inline = {
           adapter = {
             name = 'copilot',
-            model = 'claude-sonnet-4',
+            model = 'claude-sonnet-4.5',
           },
           keymaps = {
             accept_change = {

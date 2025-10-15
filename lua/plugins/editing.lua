@@ -27,23 +27,6 @@ return {
     },
   },
   {
-    'echasnovski/mini.comment',
-    opts = {
-      mappings = {
-        comment = '//',
-        comment_line = '//',
-      },
-    },
-  },
-  {
-    'echasnovski/mini.trailspace',
-    event = 'VeryLazy',
-    config = function()
-      vim.api.nvim_set_hl(0, 'MiniTrailspace', {fg='#870000', bg='#870000'})
-      require('mini.trailspace').setup()
-    end,
-  },
-  {
     'kylechui/nvim-surround',
     keys = {
       { 'ys', desc='Add surround' },
@@ -56,6 +39,23 @@ return {
     },
     config = function()
       require('nvim-surround').setup()
+    end,
+  },
+  {
+    'nvim-mini/mini.comment',
+    opts = {
+      mappings = {
+        comment = '//',
+        comment_line = '//',
+      },
+    },
+  },
+  {
+    'nvim-mini/mini.trailspace',
+    event = 'VeryLazy',
+    config = function()
+      vim.api.nvim_set_hl(0, 'MiniTrailspace', {fg='#870000', bg='#870000'})
+      require('mini.trailspace').setup()
     end,
   },
   {
