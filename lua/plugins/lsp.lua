@@ -49,6 +49,16 @@ return {
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python', 'rust'},
     opts = {
       servers = {
+        ['*'] = {
+          keys = {
+            {'<C-h>', vim.lsp.buf.hover, desc='Hover'},
+            {'<C-j>', '<Cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<CR>', desc='Definitions'},
+            {'<C-k>', '<Cmd>FzfLua lsp_references<CR>', desc='References'},
+            {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'},
+            {'<C-n>', '<Cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<CR>', desc='Implementations'},
+            {'<F2>', vim.lsp.buf.rename, desc='Rename', has='rename'},
+          },
+        },
         clangd = {
           capabilities = {
             offsetEncoding = {'utf-16'},
@@ -150,17 +160,9 @@ return {
       },
     },
     init = function()
-      local keys = require('lazyvim.plugins.lsp.keymaps').get()
-      keys[#keys+1] = {'<C-h>', vim.lsp.buf.hover, desc='Hover'}
-      keys[#keys+1] = {'<C-j>', '<Cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<CR>', desc='Definitions'}
-      keys[#keys+1] = {'<C-k>', '<Cmd>FzfLua lsp_references<CR>', desc='References'}
-      keys[#keys+1] = {'<C-l>', vim.lsp.buf.code_action, mode={'n', 'v'}, desc='Code Action', has='codeAction'}
-      keys[#keys+1] = {'<C-n>', '<Cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<CR>', desc='Implementations'}
-      keys[#keys+1] = {'<F2>', vim.lsp.buf.rename, desc='Rename', has='rename'}
-
-      require('lazyvim.util').lsp.on_attach(function(_, buf)
+      require('snacks.util').lsp.on(function(buf)
         require('utils.autocmd').augroup('no_inlay_hints_in_visual_block', function(autocmd)
-          local toggle = Snacks.toggle.inlay_hints()
+          local toggle = require('snacks.toggle').inlay_hints()
           autocmd('ModeChanged', '*:[\x16]', function() toggle:set(false) end)
           autocmd('ModeChanged', '[i\x16]:[^i]', function() toggle:set(true) end)
         end)
