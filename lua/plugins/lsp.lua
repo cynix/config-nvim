@@ -18,34 +18,7 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      {
-        'p00f/clangd_extensions.nvim',
-        config = function() end,
-        opts = {
-          ast = {
-            --These require codicons (https://github.com/microsoft/vscode-codicons)
-            role_icons = {
-              type = "",
-              declaration = "",
-              expression = "",
-              specifier = "",
-              statement = "",
-              ["template argument"] = "",
-            },
-            kind_icons = {
-              Compound = "",
-              Recovery = "",
-              TranslationUnit = "",
-              PackExpansion = "",
-              TemplateTypeParm = "",
-              TemplateTemplateParm = "",
-              TemplateParamObject = "",
-            },
-          },
-        },
-      },
-    },
+    dependencies = { 'p00f/clangd_extensions.nvim' },
     ft = {'c', 'cpp', 'go', 'gomod', 'json', 'jsonc', 'lua', 'python', 'rust'},
     opts = {
       servers = {
@@ -60,17 +33,16 @@ return {
           },
         },
         clangd = {
-          capabilities = {
-            offsetEncoding = {'utf-16'},
-          },
           cmd = {
             'clangd',
             '--background-index',
             '--clang-tidy',
             '--completion-style=bundled',
-            '--function-arg-placeholders',
+            '--function-arg-placeholders=1',
             '--header-insertion=iwyu',
             '--header-insertion-decorators',
+            '--enable-config',
+            '--malloc-trim',
             '--log=error',
           },
           init_options = {
@@ -168,5 +140,31 @@ return {
         end)
       end)
     end,
+  },
+  {
+    'p00f/clangd_extensions.nvim',
+    config = function() end,
+    opts = {
+      ast = {
+        --These require codicons (https://github.com/microsoft/vscode-codicons)
+        role_icons = {
+          type = "",
+          declaration = "",
+          expression = "",
+          specifier = "",
+          statement = "",
+          ["template argument"] = "",
+        },
+        kind_icons = {
+          Compound = "",
+          Recovery = "",
+          TranslationUnit = "",
+          PackExpansion = "",
+          TemplateTypeParm = "",
+          TemplateTemplateParm = "",
+          TemplateParamObject = "",
+        },
+      },
+    },
   },
 }
