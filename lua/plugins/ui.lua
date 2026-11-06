@@ -95,12 +95,15 @@ return {
   },
   {
     'petertriho/nvim-scrollbar',
+    branch = 'refactor/v2',
     event = 'VeryLazy',
     opts = {
-      show_in_active_only = true,
-      handlers = {
+      providers = {
         gitsigns = true,
-        search = true,
+      },
+      scrollbar = {
+        hide_if_all_visible = true,
+        preset = 'intellij',
       },
     },
   },
